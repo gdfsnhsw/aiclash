@@ -17,7 +17,17 @@ RUN set -eux; \
 
 RUN set -eux; \
     \
-    curl -L -O https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb;
+    if [ "${TARGETPLATFORM}" = "linux/amd64" ]; then architecture="linux64" ; fi; \
+    if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then architecture="aarch64" ; fi; \
+    if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="armhf" ; fi; \
+    mosdns_download_url=$(curl -L https://api.github.com/repos/tindy2013/subconverter/releases/latest | jq -r --arg architecture "$architecture" '.assets[] | select (.name | contains($architecture)) | .browser_download_url' -); \
+    curl -L -o subconverter.tar.gz $mosdns_download_url;
+    
+RUN set -eux; \
+    \
+    curl -L -O https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb; \
+    \
+    curl -L -O https://github.com/Dreamacro/clash-dashboard/archive/refs/heads/gh-pages.zip;
 
 
 FROM --platform=$TARGETPLATFORM alpine:3.13 AS runtime
@@ -30,7 +40,10 @@ ARG FIREQOS_VERSION=latest
 
 COPY --from=builder /go/clash /usr/local/bin/
 COPY --from=builder /go/Country.mmdb /root/.config/clash/
-COPY config.yaml.example /root/.config/clash/config.yaml
+COPY --from=builder /go/gh-pages.zip /root/.config/clash/
+COPY --from=builder /go/subconverter.tar.gz /root/.config/clash/
+COPY config.yaml.clash /root/.config/clash/config.yaml
+COPY supervisor/* /etc/supervisor.d/
 COPY entrypoint.sh /usr/local/bin/
 COPY scripts/* /usr/lib/clash/
 COPY fireqos.conf /etc/firehol/fireqos.conf
