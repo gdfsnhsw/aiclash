@@ -16,7 +16,7 @@
 
 1. 运行容器
 
-    `sudo docker run --name clash-tproxy -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.5.254 ghcr.io/silencebay/clash-tproxy:premium-latest`
+    `sudo docker run --name dfclash -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.88.2 gdfsnhsw/dfclash:latest`
 
     ```yaml
     version: '3.2'
