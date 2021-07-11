@@ -81,6 +81,7 @@ RUN set -eux; \
         bash-completion \
         # eudev \
 	unzip \
+	supervisor \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
