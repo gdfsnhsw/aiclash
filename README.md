@@ -19,37 +19,37 @@
     `sudo docker run --name clash-tproxy -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.5.254 ghcr.io/silencebay/clash-tproxy:premium-latest`
 
     ```yaml
-    version: '3.2'
-    services:
-      clash-tproxy:
-        container_name: clash-tproxy
-        image: ghcr.io/silencebay/clash-tproxy:premium-latest
-        logging:
-          options:
-            max-size: '10m'
-            max-file: '3'
-        restart: unless-stopped
-        #entrypoint: tail -f /dev/null
-        #command: tail -f /dev/null
-        volumes:
-          - ./clash_config:/clash_config
-        environment:
-          - TZ=Asia/Shanghai
-          - EN_MODE=redir-host
-        cap_add:
-          - NET_ADMIN
-          - SYS_ADMIN
-        networks:
-          dMACvLAN:
-            ipv4_address: 192.168.5.254
-          aio:
-        dns:
-          - 114.114.114.114
+version: "3.4"
 
+services:
+  dfclash:
+    container_name: dfclash
+    image: gdfsnhsw/dfclash:latest
+    privileged: true
+    logging:
+      options:
+        max-size: '10m'
+        max-file: '3'
+    restart: unless-stopped
+    volumes:
+      - ./clash_config:/clash_config
+    environment:
+      - TZ=Asia/Shanghai
+      - EN_MODE=redir-host
+      #- LOCALNETWORK=127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,224.0.0.0/4,172.16.0.0/12
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
     networks:
       dMACvLAN:
-        external:
-          name: _dMACvLan
+        ipv4_address: 192.168.88.2
+    dns:
+      - 114.114.114.114
+
+networks:
+  dMACvLAN:
+    external:
+      name: _dMACvLan
     ```
 
 1. 将手机/电脑等客户端 网关设置为容器ip,如192.168.5.254 ,dns也设置成这个
