@@ -48,7 +48,7 @@ COPY entrypoint.sh /usr/local/bin/
 COPY scripts/* /usr/lib/clash/
 COPY fireqos.conf /etc/firehol/fireqos.conf
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # fireqos
 ## iprange
