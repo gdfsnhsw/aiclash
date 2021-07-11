@@ -121,8 +121,8 @@ RUN set -eux; \
 		--disable-link-balancer \
 		--disable-update-ipsets \
 		--disable-vnetbuild \
-        --disable-doc \
-        --disable-man \
+    	    	--disable-doc \
+        	--disable-man \
     ; \
     make; \
     make install; \
