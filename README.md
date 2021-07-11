@@ -4,11 +4,11 @@
 ## 食用方法
 1. 开启混杂模式
 
-    `ip link set eth0 promisc on`
+    `ip link set ens192 promisc on`
 
 1. docker创建网络,注意将网段改为你自己的
 
-    `docker network create -d macvlan --subnet=192.168.5.0/24 --gateway=192.168.5.1 -o parent=eth0 _dMACvLan`
+    `docker network create -d macvlan --subnet=192.168.88.0/24 --gateway=192.168.88.1 -o parent=ens192 _dMACvLan`
 
     *`_` 是为了提高 `_dMACvLan` 的优先级，可在多网络容器的中作为默认路由。
 
