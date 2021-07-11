@@ -12,6 +12,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./clash_config:/clash_config
+      - ./subconverter:/etc/subconverter
     environment:
       - TZ=Asia/Shanghai
       - EN_MODE=redir-host
