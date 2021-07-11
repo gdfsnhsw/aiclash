@@ -26,6 +26,6 @@ services:
       - 114.114.114.114
 
 networks:
-  dMACvLan:
+  dMACvLAN:
     external:
-      name: dMACvLan
+      name: _dMACvLan
