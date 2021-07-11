@@ -3,7 +3,7 @@ name: Publish Docker Image
 on:
   push:
     branches: 
-      - clash-premium
+      - main
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 0 */3 * *"
@@ -72,10 +72,10 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/clash-tproxy:premium-latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/clash-tproxy:premium-${{ steps.version.outputs.result }}
-            ghcr.io/silencebay/clash-tproxy:premium-latest
-            ghcr.io/silencebay/clash-tproxy:premium-${{ steps.version.outputs.result }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/dfclash:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/dfclash:${{ steps.version.outputs.result }}
+            ghcr.io/gdfsnhsw/dfclash:latest
+            ghcr.io/gdfsnhsw/dfclash:${{ steps.version.outputs.result }}
           build-args: |
             FIREQOS_VERSION=${{ secrets.FIREQOS_VERSION }}
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -92,10 +92,10 @@ jobs:
           platforms: linux/arm64,linux/arm/v7,linux/amd64
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/clash-tproxy:premium-latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/clash-tproxy:premium-${{ steps.version.outputs.result }}
-            ghcr.io/silencebay/clash-tproxy:premium-latest
-            ghcr.io/silencebay/clash-tproxy:premium-${{ steps.version.outputs.result }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/dfclash:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/dfclash:${{ steps.version.outputs.result }}
+            ghcr.io/gdfsnhsw/dfclash:latest
+            ghcr.io/gdfsnhsw/dfclash:${{ steps.version.outputs.result }}
           build-args: |
             FIREQOS_VERSION=${{ secrets.FIREQOS_VERSION }}
           cache-from: type=local,src=/tmp/.buildx-cache
