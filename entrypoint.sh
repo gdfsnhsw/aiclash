@@ -31,4 +31,14 @@ if [ ! -e '/clash_config/Country.mmdb' ]; then
     echo -e "\033[32m=======更新Country.mmdb成功=======\033[0m"   
 fi
 
+if [ ! -e '/etc/subconverter/subconverter' ] ; then
+    tar -zxvf /root/.config/clash/subconverter.tar.gz -C /etc/
+fi
+
+apk add supervisor
+supervisord -c /etc/supervisord.conf
+echo -e "supervisord启动..."
+
+tail -f /dev/null
+
 exec "$@"
