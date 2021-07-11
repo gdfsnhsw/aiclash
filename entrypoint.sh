@@ -36,9 +36,9 @@ if [ ! -e '/etc/subconverter/subconverter' ] ; then
 fi
 
 # apk add supervisor
-supervisord -c /etc/supervisord.conf
-echo -e "supervisord启动..."
+# supervisord -c /etc/supervisord.conf
+# echo -e "supervisord启动..."
 
-tail -f /dev/null
+# tail -f /dev/null
 
 exec "$@"
