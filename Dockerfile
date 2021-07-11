@@ -81,7 +81,7 @@ RUN set -eux; \
         bash-completion \
         # eudev \
 	unzip \
-	# supervisor \
+	supervisor \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -150,4 +150,4 @@ RUN set -eux; \
 WORKDIR /clash_config
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["su", "-s", "/bin/bash", "-c", "/usr/local/bin/clash -d /clash_config", "nobody"]
+#CMD ["su", "-s", "/bin/bash", "-c", "/usr/local/bin/clash -d /clash_config", "nobody"]
