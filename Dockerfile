@@ -80,6 +80,7 @@ RUN set -eux; \
         bash-doc \
         bash-completion \
         # eudev \
+	unzip \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -131,6 +132,11 @@ RUN set -eux; \
     ; \
     apk del .build-deps; \
     rm -rf /src; \
+    \
+    \
+    # subconverter
+    \
+    mkdir /etc/subconverter; \
     \
     \
     # clash
