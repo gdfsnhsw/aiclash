@@ -25,6 +25,13 @@ set_localnetwork() {
     log "[ipset] setting process done."
 }
 
+gethost(){
+	[ -z "$host" ] && host=$(ubus call network.interface.lan status 2>&1 | grep \"address\" | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}';)
+	[ -z "$host" ] && host=$(ip a 2>&1 | grep -w 'inet' | grep 'global' | grep -E '\ 1(92|0|72)\.' | sed 's/.*inet.//g' | sed 's/\/[0-9][0-9].*$//g' | head -n 1)
+	[ -n "$host" ] && lanhost="-s $(echo $host | grep -oE '^1(92|0|72)\.')0.0.0/8"
+}
+
+
 readonly PROXY_BYPASS_USER="nobody"
 # readonly PROXY_BYPASS_CGROUP="0x100000"
 readonly PROXY_FWMARK="0x1"
