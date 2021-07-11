@@ -1,10 +1,10 @@
 version: "3.4"
 
 services:
-  clash_tp:
-    container_name: clash_tp
-    image: ghcr.io/silencebay/clash-tproxy:premium-latest
-    # privileged: true
+  dfclash:
+    container_name: dfclash
+    image: gdfsnhsw/dfclash:latest
+    privileged: true
     logging:
       options:
         max-size: '10m'
@@ -21,7 +21,7 @@ services:
       - SYS_ADMIN
     networks:
       dMACvLAN:
-        ipv4_address: 192.168.5.254
+        ipv4_address: 192.168.88.2
     dns:
       - 114.114.114.114
 
