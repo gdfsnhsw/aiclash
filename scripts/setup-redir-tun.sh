@@ -13,6 +13,7 @@ if [ "${EN_MODE:-fake-ip}" = "fake-ip" ]; then
     ip link set "$TUN_DEV" up
     ip addr add "$TUN_NET" dev "$TUN_DEV"
 else
+    gethost
     set_localnetwork
 
     #/opt/script/setup-clash-cgroup.sh
@@ -30,7 +31,7 @@ else
     iptables -t nat -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
     iptables -t nat -A CLASH -m set --match-set localnetwork dst -j RETURN
     iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports "$PROXY_REDIR_PORT"
-    iptables -t nat -A PREROUTING -p tcp -j CLASH
+    iptables -t nat -A PREROUTING -p tcp $lanhost -j CLASH
     #Google home DNS特殊处理
     iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j CLASH
     iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j CLASH
