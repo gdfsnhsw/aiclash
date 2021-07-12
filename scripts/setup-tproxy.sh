@@ -18,8 +18,8 @@ iptables -t mangle -A CLASH -m set --match-set localnetwork dst -j RETURN
 iptables -t mangle -A CLASH -p udp --dport 53 -j RETURN
 # >> prevent zerotier redirect
 iptables -t mangle -A CLASH -p udp --dport 9993 -j RETURN
-iptables -t mangle -A CLASH -p udp -j TPROXY --on-port 7893 --tproxy-mark "$PROXY_FWMARK"
-iptables -t mangle -A CLASH -p tcp -j TPROXY --on-port 7893 --tproxy-mark "$PROXY_FWMARK"
+iptables -t mangle -A CLASH -p udp -j TPROXY --on-port "$PROXY_TPROXY_PORT" --tproxy-mark "$PROXY_FWMARK"
+iptables -t mangle -A CLASH -p tcp -j TPROXY --on-port "$PROXY_TPROXY_PORT" --tproxy-mark "$PROXY_FWMARK"
 # >> REDIRECT
 iptables -t mangle -A PREROUTING -j CLASH
 
