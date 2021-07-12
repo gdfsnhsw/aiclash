@@ -1,4 +1,4 @@
-# docker_global_transparent_proxy
+# all in one clash
 使用clash +docker 进行路由转发实现全局透明代理
 
 ## 食用方法
