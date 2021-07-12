@@ -31,6 +31,9 @@ else
     iptables -t nat -A CLASH -m set --match-set localnetwork dst -j RETURN
     iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports "$PROXY_REDIR_PORT"
     iptables -t nat -A PREROUTING -p tcp -j CLASH
+    #Google home DNS特殊处理
+    iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j CLASH
+    iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j CLASH
     
     iptables -I FORWARD -o "$PROXY_TUN_DEVICE_NAME" -j ACCEPT
 
@@ -44,8 +47,7 @@ else
     iptables -t nat -A CLASH_DNS -p tcp --dport 53 -j REDIRECT --to "$PROXY_DNS_PORT"
 
     iptables -t nat -A PREROUTING -p udp -j CLASH_DNS
-    iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j CLASH_DNS
-    iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j CLASH_DNS
+    
 fi
 
 ip addr
