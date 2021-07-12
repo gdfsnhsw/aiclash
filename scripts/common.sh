@@ -28,7 +28,7 @@ set_localnetwork() {
 set_chnroute() {
     log "[ipset] Setting chnroute"
     ipset -N chnroute hash:net maxelem 65536
-    for ip in $(cat '/home/yang/bin/路由表/cn_rules.conf'); do
+    for ip in $(cat '/root/.config/clash/cn_rules.conf'); do
     ipset add chnroute $ip
     done
     log "[ipset] setting process done."
