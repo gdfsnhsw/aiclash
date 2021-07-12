@@ -40,13 +40,12 @@ else
     iptables -t nat -A CLASH_DNS -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
     #iptables -t nat -A CLASH_DNS -m owner --uid-owner systemd-timesync -j RETURN
     #iptables -t nat -A CLASH_DNS -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
-    iptables -t nat -A CLASH_DNS -p udp -j REDIRECT --to-ports "$PROXY_DNS_PORT"
+    iptables -t nat -A CLASH_DNS -p udp --dport 53 -j REDIRECT --to "$PROXY_DNS_PORT"
+    iptables -t nat -A CLASH_DNS -p tcp --dport 53 -j REDIRECT --to "$PROXY_DNS_PORT"
 
-    iptables -t mangle -I OUTPUT -j CLASH
-    iptables -t mangle -I PREROUTING -m set ! --match-set localnetwork dst -j MARK --set-mark "$PROXY_FWMARK"
-
-    iptables -t nat -I OUTPUT -p udp --dport 53 -j CLASH_DNS
-    iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to "$PROXY_DNS_PORT"
+    iptables -t nat -A PREROUTING -p udp -j CLASH_DNS
+    iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j CLASH_DNS
+    iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j CLASH_DNS
 fi
 
 ip addr
