@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  dfclash:
-    container_name: dfclash
-    image: gdfsnhsw/dfclash:latest
+  aiclash:
+    container_name: aiclash
+    image: gdfsnhsw/aiclash:latest
     privileged: true
     logging:
       options:
