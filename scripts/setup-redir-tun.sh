@@ -21,17 +21,17 @@ else
 
     ip rule add fwmark "$PROXY_FWMARK" lookup "$PROXY_ROUTE_TABLE"
 
-    iptables -t mangle -N CLASH
-    iptables -t mangle -F CLASH
-    iptables -t mangle -A CLASH -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
-    iptables -t mangle -A CLASH -p tcp --dport 53 -j MARK --set-mark "$PROXY_FWMARK"
-    iptables -t mangle -A CLASH -p udp --dport 53 -j MARK --set-mark "$PROXY_FWMARK"
+    iptables -t nat -N CLASH
+    iptables -t nat -F CLASH
+    iptables -t nat -A CLASH -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
 
-    #iptables -t mangle -A CLASH -m owner --uid-owner systemd-timesync -j RETURN
-    #iptables -t mangle -A CLASH -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
-    iptables -t mangle -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
-    iptables -t mangle -A CLASH -m set --match-set localnetwork dst -j RETURN
-    iptables -t mangle -A CLASH -j MARK --set-mark "$PROXY_FWMARK"
+    #iptables -t nat -A CLASH -m owner --uid-owner systemd-timesync -j RETURN
+    #iptables -t nat -A CLASH -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
+    iptables -t nat -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
+    iptables -t nat -A CLASH -m set --match-set localnetwork dst -j RETURN
+    iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports $PROXY_REDIR_PORT
+    
+    iptables -t nat -A CLASH -j MARK --set-mark "$PROXY_FWMARK"
 
     iptables -t nat -N CLASH_DNS
     iptables -t nat -F CLASH_DNS
