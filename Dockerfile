@@ -29,7 +29,11 @@ RUN set -eux; \
     \
     curl -L -O https://github.com/Dreamacro/clash-dashboard/archive/refs/heads/gh-pages.zip;
 
-
+RUN set -eux; \
+    \
+    curl 'http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest' > raw; \
+    cat raw | awk -F '|' '/CN/&&/ipv4/ {print $4 "/" 32-log($5)/log(2)}' | cat > cn_rules.conf;
+    
 FROM --platform=$TARGETPLATFORM alpine:3.13 AS runtime
 LABEL org.opencontainers.image.source https://silencebay@github.com/silencebay/clash-tproxy.git
 ARG TARGETPLATFORM
@@ -40,6 +44,7 @@ ARG FIREQOS_VERSION=latest
 
 COPY --from=builder /go/clash /usr/local/bin/
 COPY --from=builder /go/Country.mmdb /root/.config/clash/
+COPY --from=builder /go/cn_rules.conf /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/clash/
 COPY config.yaml.clash /root/.config/clash/config.yaml
