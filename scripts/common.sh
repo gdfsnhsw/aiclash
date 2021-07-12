@@ -27,7 +27,8 @@ set_localnetwork() {
 
 set_chnroute() {
     log "[ipset] Setting chnroute"
-    ipset -N chnroute hash:net maxelem 65536
+    # ipset -N chnroute hash:net maxelem 65536
+    ipset create chnroute hash:net family inet hashsize 1024 maxelem 65536
     for ip in $(cat '/root/.config/clash/cn_rules.conf'); do
     ipset add chnroute $ip
     done
