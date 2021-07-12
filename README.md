@@ -8,7 +8,7 @@
 
 1. docker创建网络,注意将网段改为你自己的
 
-    `docker network create -d macvlan --subnet=192.168.88.0/24 --gateway=192.168.88.1 -o parent=ens192 _dMACvLan`
+    `docker network create -d macvlan --subnet=192.168.88.0/24 --gateway=192.168.88.1 -o parent=ens3 _dMACvLan`
 
     *`_` 是为了提高 `_dMACvLan` 的优先级，可在多网络容器的中作为默认路由。
 
@@ -16,14 +16,14 @@
 
 1. 运行容器
 
-    `sudo docker run --name dfclash -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.88.2 gdfsnhsw/dfclash:latest`
+    `sudo docker run --name dfclash -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.88.2 gdfsnhsw/aiclash:latest`
 
     ```yaml
     version: '3.2'
     services:
-      dfclash:
-        container_name: dfclash
-        image: gdfsnhsw/dfclash:latest
+      aiclash:
+        container_name: aiclash
+        image: gdfsnhsw/aiclash:latest
         privileged: true
         logging:
           options:
@@ -35,6 +35,7 @@
         environment:
           - TZ=Asia/Shanghai
           - EN_MODE=redir-host
+          - ROUTE_MODE=redir-tun
           #- LOCALNETWORK=127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,224.0.0.0/4,172.16.0.0/12
         cap_add:
           - NET_ADMIN
