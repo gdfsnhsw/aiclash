@@ -29,9 +29,10 @@ else
     #iptables -t nat -A CLASH -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
     iptables -t nat -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
     iptables -t nat -A CLASH -m set --match-set localnetwork dst -j RETURN
-    iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports $PROXY_REDIR_PORT
+    iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports "$PROXY_REDIR_PORT"
+    iptables -t nat -A PREROUTING -p tcp $lanhost -j CLASH
     
-    iptables -t nat -A CLASH -j MARK --set-mark "$PROXY_FWMARK"
+    iptables -I FORWARD -o "$PROXY_TUN_DEVICE_NAME" -j ACCEPT
 
     iptables -t nat -N CLASH_DNS
     iptables -t nat -F CLASH_DNS
