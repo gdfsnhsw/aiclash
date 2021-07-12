@@ -25,6 +25,16 @@ set_localnetwork() {
     log "[ipset] setting process done."
 }
 
+set_chnroute() {
+    log "[ipset] Setting chnroute"
+    ipset -N chnroute hash:net maxelem 65536
+    for ip in $(cat '/home/yang/bin/路由表/cn_rules.conf'); do
+    ipset add chnroute $ip
+    done
+    log "[ipset] setting process done."
+}
+
+
 readonly PROXY_BYPASS_USER="nobody"
 # readonly PROXY_BYPASS_CGROUP="0x100000"
 readonly PROXY_FWMARK="0x1"
