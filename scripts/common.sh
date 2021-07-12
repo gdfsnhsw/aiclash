@@ -22,7 +22,7 @@ set_localnetwork() {
         log "[ipset] Adding '${entry}'"
         ipset add localnetwork ${entry}
     done
-    log "[ipset] setting process done."
+    log "[ipset] setting localnetwork done."
 }
 
 set_chnroute() {
@@ -31,7 +31,7 @@ set_chnroute() {
     for ip in $(cat '/root/.config/clash/cn_rules.conf'); do
     ipset add chnroute $ip
     done
-    log "[ipset] setting process done."
+    log "[ipset] setting chnroute done."
 }
 
 
