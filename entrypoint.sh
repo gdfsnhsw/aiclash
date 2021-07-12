@@ -2,17 +2,10 @@
 
 set -e
 
-if [ "$ROUTE_MODE" = "redir-tun" ]; then
-    echo -e "\033[32m=======Redirect TCP and transfer UDP to utun device=======\033[0m"
-    #redir-tun模式(混合模式)
-    /usr/lib/clash/setup-redir-tun.sh &
-elif [ "$ROUTE_MODE" = "tun" ]; then
-    echo -e "\033[32m=======Transfer TCP and UDP to utun device=======\033[0m"
-    #tun模式
+if [ -n "$EN_MODE_TUN" ]; then
+    #TUN模式
     /usr/lib/clash/setup-tun.sh &
-elif [ "$ROUTE_MODE" = "tproxy" ]; then
-    echo -e "\033[32m=======Redirect TCP and TProxy UDP=======\033[0m"
-    #tproxy模式
+else
     /usr/lib/clash/setup-tproxy.sh &
 fi
 
