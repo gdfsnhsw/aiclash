@@ -24,11 +24,11 @@ else
 
     iptables -t nat -N CLASH
     iptables -t nat -F CLASH
-    iptables -t nat -A CLASH -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
+    #iptables -t nat -A CLASH -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
 
     #iptables -t nat -A CLASH -m owner --uid-owner systemd-timesync -j RETURN
     #iptables -t nat -A CLASH -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
-    iptables -t nat -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
+    #iptables -t nat -A CLASH -m addrtype --dst-type BROADCAST -j RETURN
     iptables -t nat -A CLASH -m set --match-set localnetwork dst -j RETURN
     iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports "$PROXY_REDIR_PORT"
     iptables -t nat -A PREROUTING -p tcp $lanhost -j CLASH
@@ -40,8 +40,8 @@ else
 
     iptables -t nat -N CLASH_DNS
     iptables -t nat -F CLASH_DNS
-    iptables -t nat -A CLASH_DNS -d 127.0.0.0/8 -j RETURN
-    iptables -t nat -A CLASH_DNS -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
+    #iptables -t nat -A CLASH_DNS -d 127.0.0.0/8 -j RETURN
+    #iptables -t nat -A CLASH_DNS -m owner --uid-owner "$PROXY_BYPASS_USER" -j RETURN
     #iptables -t nat -A CLASH_DNS -m owner --uid-owner systemd-timesync -j RETURN
     #iptables -t nat -A CLASH_DNS -m cgroup --cgroup "$PROXY_BYPASS_CGROUP" -j RETURN
     iptables -t nat -A CLASH_DNS -p udp --dport 53 -j REDIRECT --to "$PROXY_DNS_PORT"
