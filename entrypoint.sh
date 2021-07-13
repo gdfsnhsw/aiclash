@@ -40,7 +40,7 @@ if [ ! -e '/clash_config/Country.mmdb' ]; then
 fi
 
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
-    tar -zxvf /root/.config/clash/subconverter.tar.gz -C /etc/
+    tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
 fi
 
 apk add supervisor
