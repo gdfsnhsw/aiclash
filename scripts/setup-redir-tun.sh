@@ -62,12 +62,12 @@ set_nft() {
     source /usr/lib/clash/common.sh
 
     while true; do
-        ip link show $PROXY_TUN_DEVICE_NAME
+        ip link show utun
         [ $? -eq 0 ] && break
         sleep 1
     done
 
-    ip tuntap add utun mode tun user root
+    ip tuntap add utun mode tun user nobaby
     ip link set utun up
     ip addr add "198.18.0.1/16" dev utun
 
