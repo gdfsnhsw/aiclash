@@ -35,7 +35,11 @@ RUN set -eux; \
     \
     curl -L -O https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb; \
     \
-    curl -L -O https://github.com/Dreamacro/clash-dashboard/archive/refs/heads/gh-pages.zip;
+    curl -L -O https://github.com/Dreamacro/clash-dashboard/archive/refs/heads/gh-pages.zip; \
+    \
+    curl -L -O https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat; \
+    \
+    curl -L -O https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat;
 
     
 RUN set -eux; \
