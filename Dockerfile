@@ -25,6 +25,14 @@ RUN set -eux; \
     
 RUN set -eux; \
     \
+    if [ "${TARGETPLATFORM}" = "linux/amd64" ]; then architecture="linux-amd64" ; fi; \
+    if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then architecture="linux-arm64" ; fi; \
+    if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="linux-arm-7" ; fi; \
+    mosdns_download_url=$(curl -L https://api.github.com/repos/IrineSistiana/mosdns/releases/latest | jq -r --arg architecture "$architecture" '.assets[] | select (.name | contains($architecture)) | .browser_download_url' -); \
+    curl -L -o mosdns.tar.gz $mosdns_download_url;
+
+RUN set -eux; \
+    \
     curl -L -O https://github.com/Dreamacro/maxmind-geoip/releases/latest/download/Country.mmdb; \
     \
     curl -L -O https://github.com/Dreamacro/clash-dashboard/archive/refs/heads/gh-pages.zip;
