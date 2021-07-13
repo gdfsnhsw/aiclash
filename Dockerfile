@@ -29,7 +29,7 @@ RUN set -eux; \
     if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then architecture="linux-arm64" ; fi; \
     if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="linux-arm-7" ; fi; \
     mosdns_download_url=$(curl -L https://api.github.com/repos/IrineSistiana/mosdns/releases/latest | jq -r --arg architecture "$architecture" '.assets[] | select (.name | contains($architecture)) | .browser_download_url' -); \
-    curl -L -o mosdns.tar.gz $mosdns_download_url;
+    curl -L -o mosdns.zip $mosdns_download_url;
 
 RUN set -eux; \
     \
@@ -61,6 +61,7 @@ COPY --from=builder /go/clash /usr/local/bin/
 COPY --from=builder /go/Country.mmdb /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/clash/
+COPY --from=builder /go/mosdns.zip /root/.config/clash/
 COPY --from=builder /go/chnroute.nft /usr/lib/clash/
 COPY config.yaml.clash /root/.config/clash/config.yaml
 COPY supervisor/* /etc/supervisor.d/
