@@ -54,7 +54,7 @@ COPY --from=builder /go/Country.mmdb /root/.config/clash/
 COPY --from=builder /go/cn_rules.conf /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/clash/
-COPY --from=builder /go/chnroute.nft /root/.config/clash/
+COPY --from=builder /go/chnroute.nft /usr/lib/clash/
 COPY config.yaml.clash /root/.config/clash/config.yaml
 COPY supervisor/* /etc/supervisor.d/
 COPY entrypoint.sh /usr/local/bin/
@@ -95,6 +95,7 @@ RUN set -eux; \
         # eudev \
 	unzip \
 	# supervisor \
+	nftables \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
