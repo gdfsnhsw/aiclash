@@ -67,7 +67,7 @@ set_nft() {
         sleep 1
     done
 
-    ip tuntap add utun mode tun user nobaby
+    ip tuntap add utun mode tun user nobody
     ip link set utun up
     ip addr add "198.18.0.1/16" dev utun
 
