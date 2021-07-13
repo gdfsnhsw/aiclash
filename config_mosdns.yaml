@@ -1,1 +1,121 @@
+################# 日志 ################
+log:
+  level: info           
+  file: ./mosdns.log    
+
+  ################# 必要插件 ################
+plugin:
+  - tag: main_server                
+    type: server                    
+    args:                           
+      entry: main_sequence         
+      max_concurrent_queries: 0     
+      server:                       
+        - protocol: udp             
+          addr: 0.0.0.0:53          
+          timeout: 5                
+        - protocol: tcp
+          addr: 0.0.0.0:53
+          timeout: 5
+          idle_timeout: 10          
+
+################# 可执行插件 ################
+
+  - tag: main_sequence      
+    type: sequence          
+    args:                           
+      exec:   
+        - hosts
+        - if:
+            - adblock_list               
+          exec:       
+            - _block_with_empty_response              
+            - _end
+        - if:
+            - black_list                 
+          exec:       
+            - forward_clash              
+            - _end 
+        - forward_clash
+        - if:
+            - white_list
+            - direct_list           
+          exec:
+            - forward_direct         
+            - _end
+
+################ 解析服务器插件 #################
+  
+##### 解析直连域名的插件，direct #####
+  - tag: forward_direct
+    type: fast_forward                   
+    args:    
+      upstream:     
+        - addr: tls://119.29.29.29
+          timeout: 2
+          trusted: true
+          idle_timeout: 1000
+          max_conns: 10
+        - addr: tls://223.6.6.6
+          timeout: 2
+          trusted: true
+          idle_timeout: 1000
+          max_conns: 10
+##### 解析代理域名的插件，clash #####
+  - tag: forward_clash
+    type: fast_forward
+    args:
+      upstream:
+        - protocol: udp
+          addr: 127.0.0.1:5352
+          trusted: true
+      deduplicate: true
+################ 匹配器插件 #################
+
+##### 匹配广告域名的插件 #####
+  - tag: adblock_list
+    type: query_matcher
+    args:
+      domain:
+        - ext:./ad/adblock.china.list
+        - ext:./ad/adblock.global.list
+        - ext:./ad/adblock.list     
+        - ext:./geosite.dat:category-ads-all
+
+##### 匹配黑名单的插件 #####
+  - tag: black_list                   
+    type: query_matcher
+    args:
+      domain:
+        - ext:./global/black.list
+        - ext:./global/google.list
+        - ext:./global/proxy.list
+        - ext:./geosite.dat:geolocation-!cn
+
+##### 匹配白名单的插件 #####        
+  - tag: white_list                   
+    type: query_matcher
+    args:
+      domain:
+        - ext:./china/white.list
+        - ext:./china/apple.china.list
+        - ext:./china/microsoft.china.list
+        
+##### 匹配直连域名/IP的插件 #####
+  - tag: direct_list                  
+    type: query_matcher
+    args:
+      domain:
+        - ext:./geosite.dat:cn
+      client_ip:   
+        - ext:./geoip.dat:cn     
+        
+##### 匹配hosts的插件 #####
+  - tag: hosts
+    type: hosts
+    args:
+      hosts:               
+        - ext:./hosts/hosts.list 
+        
+include: [ ]
 
