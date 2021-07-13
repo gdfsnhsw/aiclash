@@ -4,7 +4,7 @@ ARG BUILDPLATFORM
 
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
-RUN apk add --no-cache curl jq
+RUN apk add --no-cache curl jq unzip
 
 WORKDIR /go
 RUN set -eux; \
@@ -29,7 +29,8 @@ RUN set -eux; \
     if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then architecture="linux-arm64" ; fi; \
     if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="linux-arm-7" ; fi; \
     mosdns_download_url=$(curl -L https://api.github.com/repos/IrineSistiana/mosdns/releases/latest | jq -r --arg architecture "$architecture" '.assets[] | select (.name | contains($architecture)) | .browser_download_url' -); \
-    curl -L -o mosdns.zip $mosdns_download_url;
+    curl -L -o mosdns.zip $mosdns_download_url; \
+    unzip mosdns.zip;
 
 RUN set -eux; \
     \
@@ -61,7 +62,7 @@ COPY --from=builder /go/clash /usr/local/bin/
 COPY --from=builder /go/Country.mmdb /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/subconverter/
-COPY --from=builder /go/mosdns.zip /root/.config/mosdns/
+COPY --from=builder /go/mosdns /usr/local/bin/
 COPY --from=builder /go/geoip.dat /root/.config/mosdns/
 COPY --from=builder /go/geosite.dat /root/.config/mosdns/
 COPY --from=builder /go/chnroute.nft /usr/lib/clash/
@@ -158,6 +159,11 @@ RUN set -eux; \
     ; \
     apk del .build-deps; \
     rm -rf /src; \
+    \
+    \
+    # mosdns
+    \
+    mkdir /etc/mosdns; \
     \
     \
     # subconverter
