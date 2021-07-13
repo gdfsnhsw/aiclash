@@ -76,7 +76,7 @@ set_nft() {
     ip rule del fwmark 114514 lookup 114 > /dev/null 2> /dev/null
     ip rule add fwmark 114514 lookup 114
     
-    nft -f /usr/lib/clash/nft_redir-tun.conf
+    nft -f /usr/lib/clash/nft-redir-tun.conf
     
     #sysctl -w net/ipv4/ip_forward=1
 
