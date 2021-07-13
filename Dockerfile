@@ -62,6 +62,8 @@ COPY --from=builder /go/Country.mmdb /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/clash/
 COPY --from=builder /go/mosdns.zip /root/.config/clash/
+COPY --from=builder /go/geoip.dat /root/.config/clash/
+COPY --from=builder /go/geosite.dat /root/.config/clash/
 COPY --from=builder /go/chnroute.nft /usr/lib/clash/
 COPY config.yaml.clash /root/.config/clash/config.yaml
 COPY supervisor/* /etc/supervisor.d/
