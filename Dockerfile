@@ -65,7 +65,8 @@ COPY --from=builder /go/mosdns.zip /root/.config/mosdns/
 COPY --from=builder /go/geoip.dat /root/.config/mosdns/
 COPY --from=builder /go/geosite.dat /root/.config/mosdns/
 COPY --from=builder /go/chnroute.nft /usr/lib/clash/
-COPY config.yaml.clash /root/.config/clash/config.yaml
+COPY config_clash.yaml /root/.config/clash/config.yaml
+COPY config_mosdns.yaml /root/.config/mosdns/config.yaml
 COPY supervisor/* /etc/supervisor.d/
 COPY entrypoint.sh /usr/local/bin/
 COPY scripts/* /usr/lib/clash/
