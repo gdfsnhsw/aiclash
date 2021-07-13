@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set_ipt() {
 source /usr/lib/clash/common.sh
 
 while true; do
@@ -54,3 +55,4 @@ fi
 ip addr
 
 fireqos start
+}
