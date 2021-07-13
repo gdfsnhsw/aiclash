@@ -23,26 +23,36 @@ plugin:
 
   - tag: main_sequence      
     type: sequence          
-    args:                           
-      exec:   
-        - hosts
+    args:
+      exec:
         - if:
-            - adblock_list               
-          exec:       
-            - _block_with_empty_response              
-            - _end
-        - if:
-            - black_list                 
-          exec:       
-            - forward_clash              
-            - _end 
-        - forward_clash
-        - if:
-            - white_list
-            - direct_list           
+            - query_is_ad_domain    # 已知的广告域名
           exec:
-            - forward_direct         
+            - _block_with_nxdomain  # 屏蔽
             - _end
+
+        - if:
+            - query_is_local_domain   # 已知的本地域名
+            - '!_query_is_common'     # 和不常见的请求类型
+          exec:
+            - forward_direct           # 用本地服务器
+            - _end
+
+        - if:
+            - query_is_non_local_domain  # 已知的非本地域名
+          exec:
+            - forward_clash             # 用远程服务器
+            - _end
+
+        # 剩下的未知域名用 IP 分流。以下是"顺序 IP 分流"的逻辑。很稳定，不易出错。
+        # <高级> 如果想用"并发 IP 分流"逻辑，从下文的 <并发 IP 分流示例> 里选择一个方案，
+        # 然后将下面几行替换掉。
+        - forward_direct               # 先请求转发至本地服务器
+        - if:
+            - response_has_local_ip   # 如果(本地)应答包含本地 IP
+          exec:
+            - _end                    # 就直接采用结果
+        - forward_clash               # 否则去请求远程服务器的结果
 
 ################ 解析服务器插件 #################
   
@@ -70,52 +80,36 @@ plugin:
           addr: 127.0.0.1:5352
           trusted: true
       deduplicate: true
+      
 ################ 匹配器插件 #################
 
-##### 匹配广告域名的插件 #####
-  - tag: adblock_list
+  # 匹配本地域名的插件
+  - tag: query_is_local_domain
     type: query_matcher
     args:
       domain:
-        - ext:./ad/adblock.china.list
-        - ext:./ad/adblock.global.list
-        - ext:./ad/adblock.list     
-        - ext:./geosite.dat:category-ads-all
+        - 'ext:./geosite.dat:cn'
 
-##### 匹配黑名单的插件 #####
-  - tag: black_list                   
+  # 匹配非本地域名的插件
+  - tag: query_is_non_local_domain
     type: query_matcher
     args:
       domain:
-        - ext:./global/black.list
-        - ext:./global/google.list
-        - ext:./global/proxy.list
-        - ext:./geosite.dat:geolocation-!cn
+        - 'ext:./geosite.dat:geolocation-!cn'
 
-##### 匹配白名单的插件 #####        
-  - tag: white_list                   
+  # 匹配广告域名的插件
+  - tag: query_is_ad_domain
     type: query_matcher
     args:
       domain:
-        - ext:./china/white.list
-        - ext:./china/apple.china.list
-        - ext:./china/microsoft.china.list
-        
-##### 匹配直连域名/IP的插件 #####
-  - tag: direct_list                  
-    type: query_matcher
+        - 'ext:./geosite.dat:category-ads-all'
+
+  # 匹配本地 IP 的插件
+  - tag: response_has_local_ip
+    type: response_matcher
     args:
-      domain:
-        - ext:./geosite.dat:cn
-      client_ip:   
-        - ext:./geoip.dat:cn     
-        
-##### 匹配hosts的插件 #####
-  - tag: hosts
-    type: hosts
-    args:
-      hosts:               
-        - ext:./hosts/hosts.list 
+      ip:
+        - 'ext:./geoip.dat:cn'
         
 include: [ ]
 
