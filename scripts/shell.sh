@@ -5,7 +5,6 @@ source /usr/lib/clash/common.sh
 sed -i '/url=*/'d $formyairportPath
 setconfig url $URL
 
-
 while true; do
     supervisorctl status subconverter
     [ $? -eq 0 ] && wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password" -O config.yaml && break
