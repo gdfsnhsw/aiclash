@@ -54,7 +54,7 @@ fi
 
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
     tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
-    cp  /root/.config/subconverter/* /etc/subconverter/profiles
+    cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
 fi
 
 bash /clash_config/shell.sh
