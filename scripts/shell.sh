@@ -18,9 +18,9 @@ while true; do
     sleep 3
 done
 
-while true; do
-    ip link show utun
-    [ $? -eq 0 ] && break
-    echo -e "\033[32m正在启动clash，请等待...\033[0m"
-    sleep 3
-done
+#while true; do
+#    ip link show utun
+#    [ $? -eq 0 ] && break
+#    echo -e "\033[32m正在启动clash，请等待...\033[0m"
+#    sleep 3
+#done
