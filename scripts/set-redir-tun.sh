@@ -17,9 +17,50 @@ ip route replace default dev utun table 114
 
 ip rule del fwmark 114514 lookup 114 > /dev/null 2> /dev/null
 ip rule add fwmark 114514 lookup 114
-    
+
+
+_setup(){
+
 nft -f /usr/lib/clash/nft_redir-tun.conf
-    
+
+    exit 0
+
+}
+
+_setup2(){
+
+    nft -f - << EOF
+    define LOCAL_SUBNET = { 10.0.0.0/8, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 }
+    table clash
+    flush table clash
+    table clash {
+        chain forward {
+            type filter hook prerouting priority 0; policy accept;           
+            ip protocol != { tcp, udp } accept      
+            iif utun accept
+            ip daddr \$LOCAL_SUBNET accept
+            ip protocol udp mark set $NETFILTER_MARK
+        }
+        chain forward-dns-redirect {
+            type nat hook prerouting priority 0; policy accept;        
+            ip protocol != { tcp, udp } accept       
+            ip daddr \$LOCAL_SUBNET tcp dport 53 dnat 5352
+            ip daddr \$LOCAL_SUBNET udp dport 53 dnat 5352
+            iif utun accept
+            ip daddr \$LOCAL_SUBNET accept
+            ip protocol tcp redirect to 7892
+        }
+    }
+EOF
+
+    #sysctl -w net/ipv4/ip_forward=1
+
+    exit 0
+
+}
+
+
+
 #sysctl -w net/ipv4/ip_forward=1
 
 ip addr
