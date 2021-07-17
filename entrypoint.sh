@@ -62,11 +62,11 @@ if [ ! -e '/etc/subconverter/subconverter' ] ; then
     cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
 fi
 
-bash /clash_config/shell.sh
-
 apk add supervisor
 supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
+
+bash /clash_config/shell.sh
 
 tail -f /dev/null
 
