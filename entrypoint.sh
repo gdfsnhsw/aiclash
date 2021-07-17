@@ -23,17 +23,17 @@ if [ ! -e '/clash_config/dashboard/index.html' ] || [ "$UPDATE" = "true" ] ; the
     unzip -d /root/.config/clash/ /root/.config/clash/gh-pages.zip
     mv -f /root/.config/clash/clash-dashboard-gh-pages/* /root/.config/clash/dashboard
     cp -r /root/.config/clash/dashboard /clash_config/dashboard
-    echo -e "\033[32m=======更新dashboard成功=======\033[0m"
+    echo -e "\033[32m=======更新dashboard成功================\033[0m"
 fi
 
 if [ ! -e '/clash_config/config.yaml' ]; then
     cp  /root/.config/clash/config.yaml /clash_config/config.yaml
-    echo -e "\033[32m=======更新clash_config.yaml成功=======\033[0m"
+    echo -e "\033[32m=======更新clash_config.yaml成功========\033[0m"
 fi
 
 if [ ! -e '/clash_config/Country.mmdb' ]; then
     cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
-    echo -e "\033[32m=======更新Country.mmdb成功=======\033[0m"   
+    echo -e "\033[32m=======更新Country.mmdb成功=============\033[0m"   
 fi
 
 if [ ! -e '/etc/mosdns/config.yaml' ]; then
@@ -43,12 +43,12 @@ fi
 
 if [ ! -e '/etc/mosdns/geoip.dat' ]; then
     cp  /root/.config/mosdns/geoip.dat /etc/mosdns/geoip.dat
-    echo -e "\033[32m=======更新geoip.dat成功=======\033[0m"   
+    echo -e "\033[32m=======更新geoip.dat成功================\033[0m"   
 fi
 
 if [ ! -e '/etc/mosdns/geosite.dat' ]; then
     cp  /root/.config/mosdns/geosite.dat /etc/mosdns/geosite.dat
-    echo -e "\033[32m=======更新geosite.dat成功=======\033[0m"   
+    echo -e "\033[32m=======更新geosite.dat成功==============\033[0m"   
 fi
 
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
