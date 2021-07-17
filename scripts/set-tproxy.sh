@@ -17,3 +17,5 @@ ip rule add fwmark 114514 lookup 114
 nft -f /usr/lib/clash/nft_tproxy.conf
     
 # sysctl -w net/ipv4/ip_forward=1
+
+ip addr
