@@ -28,6 +28,7 @@ fi
 
 if [ ! -e '/clash_config/config.yaml' ]; then
     cp  /root/.config/clash/config.yaml /clash_config/config.yaml
+    cp  /usr/lib/clash/shell.sh /clash_config/shell.sh
     echo -e "\033[32m=======更新clash_config.yaml成功========\033[0m"
 fi
 
@@ -56,7 +57,7 @@ if [ ! -e '/etc/subconverter/subconverter' ] ; then
     cp  /root/.config/subconverter/* /etc/subconverter/profiles
 fi
 
-bash /usr/lib/clash/shell.sh
+bash /clash_config/shell.sh
 
 apk add supervisor
 supervisord -c /etc/supervisord.conf
