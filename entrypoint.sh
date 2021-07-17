@@ -22,6 +22,8 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 
 echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
 
+apk add supervisor
+
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
     tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
     cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
@@ -62,7 +64,6 @@ if [ ! -e '/etc/mosdns/geosite.dat' ]; then
     echo -e "\033[32m=======更新geosite.dat成功==============\033[0m"   
 fi
 
-apk add supervisor
 supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
 
