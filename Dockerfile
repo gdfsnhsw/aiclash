@@ -68,9 +68,10 @@ COPY --from=builder /go/geosite.dat /root/.config/mosdns/
 COPY --from=builder /go/chnroute.nft /usr/lib/clash/
 COPY config_clash.yaml /root/.config/clash/config.yaml
 COPY config_mosdns.yaml /root/.config/mosdns/config.yaml
+COPY subconverter/* /root/.config/subconverter/
 COPY supervisor/* /etc/supervisor.d/
-COPY entrypoint.sh /usr/local/bin/
 COPY scripts/* /usr/lib/clash/
+COPY entrypoint.sh /usr/local/bin/
 COPY fireqos.conf /etc/firehol/fireqos.conf
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
