@@ -33,12 +33,12 @@ fi
 
 if [ ! -e '/clash_config/config.yaml' ]; then
     cp  /root/.config/clash/config.yaml /clash_config/config.yaml
-    cp  /usr/lib/clash/shell.sh /clash_config/shell.sh
     echo -e "\033[32m=======更新clash_config.yaml成功========\033[0m"
 fi
 
 if [ ! -e '/clash_config/Country.mmdb' ]; then
     cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
+    cp  /usr/lib/clash/shell.sh /clash_config/shell.sh
     echo -e "\033[32m=======更新Country.mmdb成功=============\033[0m"   
 fi
 
