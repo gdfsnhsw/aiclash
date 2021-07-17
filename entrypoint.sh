@@ -21,6 +21,8 @@ fi
 # Deprecated! 容器默认已开启
 echo "1" > /proc/sys/net/ipv4/ip_forward
 
+echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
+
 if [ ! -e '/clash_config/dashboard/index.html' ] || [ "$UPDATE" = "true" ] ; then
     mkdir -p /root/.config/clash/dashboard
     unzip -d /root/.config/clash/ /root/.config/clash/gh-pages.zip
