@@ -57,7 +57,7 @@ fi
 
 apk add supervisor
 supervisord -c /etc/supervisord.conf
-echo -e "supervisord启动..."
+echo -e "supervisord启动成功..."
 
 tail -f /dev/null
 
