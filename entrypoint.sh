@@ -53,6 +53,7 @@ fi
 
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
     tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
+    cp  /root/.config/subconverter/* /etc/subconverter/profiles
 fi
 
 apk add supervisor
