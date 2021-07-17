@@ -79,6 +79,6 @@ EOF
 }
 
 case "$1" in
-"setup") _setup;;
-"setup2") _setup2;;
+"set") _setup;;
+"set2") _setup2;;
 esac
