@@ -72,11 +72,9 @@ COPY subconverter/* /root/.config/subconverter/profiles/
 COPY supervisor/* /etc/supervisor.d/
 COPY scripts/* /usr/lib/clash/
 COPY entrypoint.sh /usr/local/bin/
-COPY fireqos.conf /etc/firehol/fireqos.conf
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
-# fireqos
 ## iprange
 WORKDIR /src
 RUN set -eux; \
@@ -90,14 +88,10 @@ RUN set -eux; \
         build-base \
         bash \
         iproute2 \
-        ip6tables \
-        iptables \
     "; \
     runDeps=" \
         bash \
         iproute2 \
-        ip6tables \
-        iptables \
         ipset \
         libcap \
         # for debug
@@ -116,44 +110,6 @@ RUN set -eux; \
         $runDeps \
     ; \
     \
-    \
-    git clone https://github.com/firehol/iprange; \
-    cd iprange; \
-    ./autogen.sh; \
-    ./configure \
-		--prefix=/usr \
-		--sysconfdir=/etc/ssh \
-		--datadir=/usr/share/openssh \
-		--libexecdir=/usr/lib/ssh \
-		--disable-man \
-		--enable-maintainer-mode \
-    ; \
-    make; \
-    make install; \
-    \
-    \
-    ## fireqos
-    \
-    cd /src; \
-    git clone https://github.com/firehol/firehol; \
-    cd firehol; \
-    tag=${FIREQOS_VERSION:-latest}; \
-    if [ "${tag}" = "latest" ]; then tag=$(curl -L --silent https://api.github.com/repos/firehol/firehol/releases/latest | jq -r .tag_name); fi; \
-    git checkout $tag; \
-    ./autogen.sh; \
-    ./configure \
-        CHMOD=chmod \
-		--prefix=/usr \
-		--sysconfdir=/etc \
-		--disable-firehol \
-		--disable-link-balancer \
-		--disable-update-ipsets \
-		--disable-vnetbuild \
-    	    	--disable-doc \
-        	--disable-man \
-    ; \
-    make; \
-    make install; \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
