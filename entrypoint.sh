@@ -2,21 +2,6 @@
 
 set -e
 
-if [ "$ROUTE_MODE" = "redir-tun" ]; then
-    echo -e "\033[32m=======Redirect TCP and transfer UDP to utun device[redir-tun模式(混合模式)]=======\033[0m"
-    /usr/lib/clash/set-redir-tun.sh set1 &
-elif [ "$ROUTE_MODE" = "redir-tun2" ]; then
-    echo -e "\033[32m=======Redirect TCP and transfer UDP to utun device[redir-tun模式(混合模式)]=======\033[0m"
-    /usr/lib/clash/set-redir-tun.sh set2 &
-elif [ "$ROUTE_MODE" = "tun" ]; then
-    echo -e "\033[32m================Transfer TCP and UDP to utun device[tun模式]======================\033[0m"
-    /usr/lib/clash/set-tun.sh set1 &
-elif [ "$ROUTE_MODE" = "tproxy" ]; then
-    echo -e "\033[32m===================TProxy TCP and TProxy UDP[tproxy模式]==========================\033[0m"
-    /usr/lib/clash/set-tproxy.sh set1 &
-fi
-
-
 # 开启转发，需要 privileged
 # Deprecated! 容器默认已开启
 echo "1" > /proc/sys/net/ipv4/ip_forward
@@ -68,6 +53,20 @@ supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
 
 bash /clash_config/shell.sh
+
+if [ "$ROUTE_MODE" = "redir-tun" ]; then
+    echo -e "\033[32m=======Redirect TCP and transfer UDP to utun device[redir-tun模式(混合模式)]=======\033[0m"
+    /usr/lib/clash/set-redir-tun.sh set1 &
+elif [ "$ROUTE_MODE" = "redir-tun2" ]; then
+    echo -e "\033[32m=======Redirect TCP and transfer UDP to utun device[redir-tun模式(混合模式)]=======\033[0m"
+    /usr/lib/clash/set-redir-tun.sh set2 &
+elif [ "$ROUTE_MODE" = "tun" ]; then
+    echo -e "\033[32m================Transfer TCP and UDP to utun device[tun模式]======================\033[0m"
+    /usr/lib/clash/set-tun.sh set1 &
+elif [ "$ROUTE_MODE" = "tproxy" ]; then
+    echo -e "\033[32m===================TProxy TCP and TProxy UDP[tproxy模式]==========================\033[0m"
+    /usr/lib/clash/set-tproxy.sh set1 &
+fi
 
 tail -f /dev/null
 
