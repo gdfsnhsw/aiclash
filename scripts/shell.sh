@@ -17,6 +17,8 @@ while true; do
     sleep 3
 done
 
+supervisorctl restart clash
+
 #while true; do
 #    ip link show utun
 #    [ $? -eq 0 ] && break
