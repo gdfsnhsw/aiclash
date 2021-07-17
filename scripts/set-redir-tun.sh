@@ -61,11 +61,11 @@ _setup2(){
         chain forward-dns-redirect {
             type nat hook prerouting priority 0; policy accept;        
             ip protocol != { tcp, udp } accept       
-            ip daddr \$LOCAL_SUBNET tcp dport 53 dnat 5352
-            ip daddr \$LOCAL_SUBNET udp dport 53 dnat 5352
+            ip daddr \$LOCAL_SUBNET tcp dport 53 dnat :5352
+            ip daddr \$LOCAL_SUBNET udp dport 53 dnat :5352
             iif utun accept
             ip daddr \$LOCAL_SUBNET accept
-            ip protocol tcp redirect to 7892
+            ip protocol tcp redirect to :7892
         }
     }
 EOF
