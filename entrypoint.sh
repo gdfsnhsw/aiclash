@@ -22,6 +22,12 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 
 echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
 
+if [ ! -e '/etc/subconverter/subconverter' ] ; then
+    tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
+    cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
+    mv -f /etc/subconverter/profiles/all_base.tpl /etc/subconverter/base/all_base.tpl
+fi
+
 if [ ! -e '/clash_config/dashboard/index.html' ] || [ "$UPDATE" = "true" ] ; then
     mkdir -p /root/.config/clash/dashboard
     unzip -d /root/.config/clash/ /root/.config/clash/gh-pages.zip
@@ -54,12 +60,6 @@ fi
 if [ ! -e '/etc/mosdns/geosite.dat' ]; then
     cp  /root/.config/mosdns/geosite.dat /etc/mosdns/geosite.dat
     echo -e "\033[32m=======更新geosite.dat成功==============\033[0m"   
-fi
-
-if [ ! -e '/etc/subconverter/subconverter' ] ; then
-    tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
-    cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
-    mv -f /etc/subconverter/profiles/all_base.tpl /etc/subconverter/base/all_base.tpl
 fi
 
 apk add supervisor
