@@ -6,7 +6,7 @@ while true; do
     ip link show utun
     [ $? -eq 0 ] && break
     echo -e "\033[32m正在启动clash，请等待...\033[0m"
-    sleep 1
+    sleep 3
 done
 
 ip tuntap add utun mode tun user nobody
@@ -21,3 +21,5 @@ ip rule add fwmark 114514 lookup 114
 nft -f /usr/lib/clash/nft_tun.conf
     
 #sysctl -w net/ipv4/ip_forward=1
+
+ip addr
