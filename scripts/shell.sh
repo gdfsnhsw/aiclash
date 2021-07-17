@@ -5,6 +5,9 @@ source /usr/lib/clash/common.sh
 sed -i '/url=*/'d $formyairportPath
 setconfig url $URL
 
+sed -i '/udp=*/'d $formyairportPath
+setconfig udp $UDP
+
 while true; do
     supervisorctl status subconverter
     [ $? -eq 0 ] && \
