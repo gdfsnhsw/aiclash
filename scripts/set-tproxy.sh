@@ -6,7 +6,7 @@ while true; do
     ip link show utun
     [ $? -eq 0 ] && break
     echo -e "\033[32m正在启动clash，请等待...\033[0m"
-    sleep 1
+    sleep 3
 done
 
 ip route replace local default dev lo table 114
