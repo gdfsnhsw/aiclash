@@ -39,7 +39,7 @@ _setup2(){
             ip protocol != { tcp, udp } accept      
             iif utun accept
             ip daddr \$LOCAL_SUBNET accept
-            ip protocol udp mark set $NETFILTER_MARK
+            ip protocol udp mark set 114514
         }
         chain forward-dns-redirect {
             type nat hook prerouting priority 0; policy accept;        
