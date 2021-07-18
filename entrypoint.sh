@@ -2,6 +2,8 @@
 
 set -e
 
+
+echo -e "======================== 1. 安装修改系统文件 =========================\n"
 # 开启转发，需要 privileged
 # Deprecated! 容器默认已开启
 echo "1" > /proc/sys/net/ipv4/ip_forward
@@ -10,7 +12,7 @@ echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
 
 apk add supervisor
 
-echo -e "======================== 1. 开始自定义路由表 ========================\n"
+echo -e "======================== 2. 自定义路由表 ============================\n"
 if [ "$ROUTE_MODE" = "redir-tun" ]; then
     echo -e "\033[32m=混合模式=\033[0m"
     /usr/lib/clash/set-redir-tun.sh set1 &
@@ -25,7 +27,7 @@ elif [ "$ROUTE_MODE" = "tproxy" ]; then
     /usr/lib/clash/set-tproxy.sh set1 &
 fi
 
-echo -e "======================== 2. 载入所需文件 ============================\n"
+echo -e "======================== 3. 载入所需文件 ============================\n"
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
     tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
     cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
@@ -73,11 +75,12 @@ if [ ! -e '/etc/mosdns/geosite.dat' ]; then
     echo -e "\033[32m载入geosite.dat\033[0m"   
 fi
 
+echo -e "======================== 4. 启动程序 ===============================\n"
 supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
 
 
-echo -e "======================== 3. 自定义shell代码 ========================\n"
+echo -e "======================== 5. 自定义shell代码 ========================\n"
 if [[ $SHELL == true ]]; then
     bash /clash_config/shell.sh
     echo -e "自定义shell代码执行成功..."
