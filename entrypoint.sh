@@ -36,8 +36,8 @@ if [ ! -e '/clash_config/Country.mmdb' ]; then
     echo -e "载入Country.mmdb"   
 fi
 
-if [ ! -e '/clash_config/shell.sh' ]; then
-    cp  /usr/lib/clash/gitconfig.sh /clash_config/gitconfig.sh
+if [ ! -e '/clash_config/getconfig.sh' ]; then
+    cp  /usr/lib/clash/getconfig.sh /clash_config/getconfig.sh
     echo -e "载入shell.sh"   
 fi
 
@@ -77,7 +77,7 @@ echo -e "supervisord启动成功..."
 
 echo -e "\033[32m======================== 5. 是否自动生成config ======================\033[0m"
 if [ $GET_CONFIG = true ]; then
-    bash /clash_config/getconfif.sh
+    bash /clash_config/getconfig.sh
     echo -e "生成clash配置文件成功"
 elif [ $GET_CONFIG = false ]; then
     echo -e "未设置生成config"
