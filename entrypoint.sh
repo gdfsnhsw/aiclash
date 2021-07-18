@@ -31,10 +31,10 @@ fi
 #    echo -e "载入clash_config.yaml成功"
 #fi
 
-if [ ! -e '/clash_config/Country.mmdb' ]; then
-    cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
-    echo -e "载入Country.mmdb"   
-fi
+#if [ ! -e '/clash_config/Country.mmdb' ]; then
+#    cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
+#    echo -e "载入Country.mmdb"   
+#fi
 
 if [ ! -e '/clash_config/getconfig.sh' ]; then
     cp  /usr/lib/clash/getconfig.sh /clash_config/getconfig.sh
