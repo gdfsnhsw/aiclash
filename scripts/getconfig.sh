@@ -8,6 +8,9 @@ setconfig url $URL
 sed -i '/udp=*/'d $formyairportPath
 setconfig udp $UDP
 
+sed -i '/script=*/'d $formyairportPath
+setconfig script $SCRIPT
+
 while true; do
     supervisorctl status subconverter
     [ $? -eq 0 ] && \
