@@ -16,7 +16,7 @@ services:
       - ./mosdns:/etc/mosdns
     environment:
       - TZ=Asia/Shanghai
-      - EN_MODE=redir-host
+      - DNS_MODE=redir-host
       - ROUTE_MODE=redir-tun
       - GET_CONFIG=true
       - UDP=true
