@@ -14,7 +14,7 @@ if [ "$ROUTE_MODE" = "redir-tun" ]; then
     echo -e "混合模式"
     /usr/lib/clash/set-redir-tun.sh set1 &
 elif [ "$ROUTE_MODE" = "redir-tun2" ]; then
-    echo -e "混合模式]"
+    echo -e "混合模式"
     /usr/lib/clash/set-redir-tun.sh set2 &
 elif [ "$ROUTE_MODE" = "tun" ]; then
     echo -e "tun模式"
