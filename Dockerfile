@@ -78,6 +78,17 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 ## iprange
 WORKDIR /src
 RUN set -eux; \
+    buildDeps=" \
+        jq \
+        git \
+        autoconf \
+        automake \
+        libtool \
+        help2man \
+        build-base \
+        bash \
+        iproute2 \
+    "; \
     runDeps=" \
         bash \
         iproute2 \
@@ -89,15 +100,20 @@ RUN set -eux; \
         bash-doc \
         bash-completion \
         # eudev \
-	unzip \
-	# supervisor \
 	nftables \
     "; \
+    \
+    apk add --no-cache --virtual .build-deps \
+        $buildDeps \
+        $runDeps \
+    ; \
     \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
     ; \
+    apk del .build-deps; \
+    rm -rf /src; \
     \
     \
     # mosdns
