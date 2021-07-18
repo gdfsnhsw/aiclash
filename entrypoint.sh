@@ -81,10 +81,10 @@ echo -e "supervisord启动成功..."
 
 
 echo -e "======================== 5. 自定义shell代码 ========================\n"
-if [[ $SHELL == true ]]; then
+if [[ $SHELL = true ]]; then
     bash /clash_config/shell.sh
     echo -e "自定义shell代码执行成功..."
-elif [[ $SHELL == false ]]; then
+elif [[ $SHELL = false ]]; then
     echo -e "自定义shell代码未设置"
 fi
 
