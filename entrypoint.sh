@@ -78,9 +78,9 @@ echo -e "supervisord启动成功..."
 echo -e "\033[32m======================== 5. 是否自动生成config ======================\033[0m"
 if [ $GET_CONFIG = true ]; then
     bash /clash_config/getconfig.sh
-    echo -e "生成clash配置文件成功"
+    echo -e "\033[32m===成功生成clash配置文件===\033[0m"
 elif [ $GET_CONFIG = false ]; then
-    echo -e "未设置生成config"
+    echo -e "\033[32m===未设置生成config===\033[0m"
 fi
 
 tail -f /dev/null
