@@ -17,6 +17,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - DNS_MODE=redir-host
+      - CN_MODE=true
       - ROUTE_MODE=redir-tun
       - GET_CONFIG=true
       - UDP=true
