@@ -25,6 +25,7 @@ echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
 
 apk add supervisor
 
+echo -e "======================== 2. 载入所需文件 ============================\n"
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
     tar -zxvf /root/.config/subconverter/subconverter.tar.gz -C /etc/
     cp  /root/.config/subconverter/profiles/* /etc/subconverter/profiles
@@ -76,7 +77,7 @@ supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
 
 
-echo -e "======================== 2. 自定义shell代码 ========================\n"
+echo -e "======================== 3. 自定义shell代码 ========================\n"
 if [[ $SHELL == true ]]; then
     bash /clash_config/shell.sh
     echo -e "自定义shell代码执行成功..."
