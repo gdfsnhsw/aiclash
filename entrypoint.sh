@@ -57,10 +57,10 @@ if [ ! -e '/etc/mosdns/geosite.dat' ]; then
 fi
 
 echo -e "\033[32m======================== 3. 自定义路由表 ============================\033[0m"
-if [ "$ROUTE_MODE" = "redir-tun" ]; then
-    echo -e "混合模式"
+if [ "$ROUTE_MODE" = "redir-tun" ] && [ "$CN_IP_ROUTE" = "true" ]; then
+    echo -e "混合模式(CN)"
     /usr/lib/clash/set-redir-tun.sh set1 &
-elif [ "$ROUTE_MODE" = "redir-tun2" ]; then
+elif [ "$ROUTE_MODE" = "redir-tun" ] && [ "$CN_IP_ROUTE" = "false" ]; then
     echo -e "混合模式"
     /usr/lib/clash/set-redir-tun.sh set2 &
 elif [ "$ROUTE_MODE" = "tun" ]; then
