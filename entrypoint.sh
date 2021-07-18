@@ -48,7 +48,6 @@ fi
 
 if [ ! -e '/clash_config/Country.mmdb' ]; then
     cp  /root/.config/clash/Country.mmdb /clash_config/Country.mmdb
-    cp  /usr/lib/clash/shell.sh /clash_config/shell.sh
     echo -e "载入Country.mmdb"   
 fi
 
