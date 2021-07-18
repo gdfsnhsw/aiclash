@@ -7,9 +7,7 @@ echo -e "\033[32m======================== 1. 安装修改系统文件 ==========
 # 开启转发，需要 privileged
 # Deprecated! 容器默认已开启
 echo "1" > /proc/sys/net/ipv4/ip_forward
-
 echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
-
 apk add supervisor
 
 echo -e "\033[32m======================== 2. 自定义路由表 ============================\033[0m"
@@ -79,7 +77,6 @@ echo -e "\033[32m======================== 4. 启动程序 ======================
 supervisord -c /etc/supervisord.conf
 echo -e "supervisord启动成功..."
 
-
 echo -e "\033[32m======================== 5. 自定义shell代码 ========================\033[0m"
 if [ $SHELL = true ]; then
     bash /clash_config/shell.sh
@@ -87,8 +84,6 @@ if [ $SHELL = true ]; then
 elif [ $SHELL = false ]; then
     echo -e "自定义shell代码未设置"
 fi
-
-
 
 tail -f /dev/null
 
