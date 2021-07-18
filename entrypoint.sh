@@ -28,7 +28,7 @@ fi
 
 #if [ ! -e '/clash_config/config.yaml' ]; then
 #    cp  /root/.config/clash/config.yaml /clash_config/config.yaml
-#    echo -e "\033[32m更新clash_config.yaml成功\033[0m"
+#    echo -e "载入clash_config.yaml成功"
 #fi
 
 if [ ! -e '/clash_config/Country.mmdb' ]; then
