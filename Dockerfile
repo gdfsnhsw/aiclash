@@ -59,7 +59,7 @@ ARG FIREQOS_VERSION=latest
 # RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.11/main/" > /etc/apk/repositories
 
 COPY --from=builder /go/clash /usr/local/bin/
-COPY --from=builder /go/Country.mmdb /root/.config/clash/
+# COPY --from=builder /go/Country.mmdb /root/.config/clash/
 COPY --from=builder /go/gh-pages.zip /root/.config/clash/
 COPY --from=builder /go/subconverter.tar.gz /root/.config/subconverter/
 COPY --from=builder /go/mosdns /usr/local/bin/
