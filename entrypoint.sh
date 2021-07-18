@@ -2,6 +2,14 @@
 
 set -e
 
+# 开启转发，需要 privileged
+# Deprecated! 容器默认已开启
+echo "1" > /proc/sys/net/ipv4/ip_forward
+
+echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
+
+apk add supervisor
+
 echo -e "======================== 1. 开始自定义路由表 ========================\n"
 if [ "$ROUTE_MODE" = "redir-tun" ]; then
     echo -e "\033[32m=混合模式=\033[0m"
@@ -16,14 +24,6 @@ elif [ "$ROUTE_MODE" = "tproxy" ]; then
     echo -e "\033[32m=tproxy模式=\033[0m"
     /usr/lib/clash/set-tproxy.sh set1 &
 fi
-
-# 开启转发，需要 privileged
-# Deprecated! 容器默认已开启
-echo "1" > /proc/sys/net/ipv4/ip_forward
-
-echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
-
-apk add supervisor
 
 echo -e "======================== 2. 载入所需文件 ============================\n"
 if [ ! -e '/etc/subconverter/subconverter' ] ; then
