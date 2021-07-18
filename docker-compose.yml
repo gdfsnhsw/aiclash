@@ -18,6 +18,7 @@ services:
       - TZ=Asia/Shanghai
       - EN_MODE=redir-host
       - ROUTE_MODE=redir-tun
+      - GET_CONFIG=true
       - UDP=true
       - URL=https://dler.cloud/aaa|trojan://密码@域名:443#名称
     cap_add:
