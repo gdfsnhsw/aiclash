@@ -58,17 +58,17 @@ fi
 
 echo -e "\033[32m======================== 3. 自定义路由表 ============================\033[0m"
 if [ "$ROUTE_MODE" = "redir-tun" ] && [ "$CN_IP_ROUTE" = "true" ]; then
-    echo -e "混合模式(CN)"
-    /usr/lib/clash/set-redir-tun.sh set1 &
+    echo -e "混合模式(绕过CN_IP)"
+    /usr/lib/clash/set-redir-tun.sh cn_setup &
 elif [ "$ROUTE_MODE" = "redir-tun" ] && [ "$CN_IP_ROUTE" = "false" ]; then
     echo -e "混合模式"
-    /usr/lib/clash/set-redir-tun.sh set2 &
-elif [ "$ROUTE_MODE" = "tun" ]; then
-    echo -e "tun模式"
-    /usr/lib/clash/set-tun.sh set1 &
-elif [ "$ROUTE_MODE" = "tproxy" ]; then
-    echo -e "tproxy模式"
-    /usr/lib/clash/set-tproxy.sh set1 &
+    /usr/lib/clash/set-redir-tun.sh setup &
+elif [ "$ROUTE_MODE" = "tun" ] && [ "$CN_IP_ROUTE" = "true" ]; then
+    echo -e "tun模式(绕过CN_IP)"
+    /usr/lib/clash/set-tun.sh cn_setup &
+elif [ "$ROUTE_MODE" = "tproxy" ] && [ "$CN_IP_ROUTE" = "true" ]; then
+    echo -e "tproxy模式(绕过CN_IP)"
+    /usr/lib/clash/set-tproxy.sh cn_setup &
 fi
 
 echo -e "\033[32m======================== 4. 启动程序 ===============================\033[0m"
