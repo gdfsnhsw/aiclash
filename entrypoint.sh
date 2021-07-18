@@ -66,9 +66,15 @@ elif [ "$ROUTE_MODE" = "redir-tun" ] && [ "$CN_IP_ROUTE" = "false" ]; then
 elif [ "$ROUTE_MODE" = "tun" ] && [ "$CN_IP_ROUTE" = "true" ]; then
     echo -e "tun模式(绕过CN_IP)"
     /usr/lib/clash/set-tun.sh cn_setup &
+elif [ "$ROUTE_MODE" = "tun" ] && [ "$CN_IP_ROUTE" = "false" ]; then
+    echo -e "tun模式"
+    /usr/lib/clash/set-tun.sh setup &    
 elif [ "$ROUTE_MODE" = "tproxy" ] && [ "$CN_IP_ROUTE" = "true" ]; then
     echo -e "tproxy模式(绕过CN_IP)"
     /usr/lib/clash/set-tproxy.sh cn_setup &
+elif [ "$ROUTE_MODE" = "tproxy" ] && [ "$CN_IP_ROUTE" = "false" ]; then
+    echo -e "tproxy模式"
+    /usr/lib/clash/set-tproxy.sh setup &
 fi
 
 echo -e "\033[32m======================== 4. 启动程序 ===============================\033[0m"
