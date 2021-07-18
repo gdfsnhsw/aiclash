@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_setup1(){
+cn_setup(){
 
     while true; do
         ip link show utun
@@ -28,7 +28,7 @@ _setup1(){
 
 }
 
-_setup2(){
+setup(){
 
     while true; do
         ip link show utun
@@ -79,6 +79,6 @@ EOF
 }
 
 case "$1" in
-"set1") _setup1;;
-"set2") _setup2;;
+"cn_setup") cn_setup;;
+"setup") setup;;
 esac
