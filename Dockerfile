@@ -72,7 +72,6 @@ COPY subconverter/* /root/.config/subconverter/profiles/
 COPY supervisor/* /etc/supervisor.d/
 COPY scripts/* /usr/lib/clash/
 COPY entrypoint.sh /usr/local/bin/
-ADD /root/.config/subconverter/subconverter.tar.gz
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
