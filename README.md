@@ -132,12 +132,13 @@ echo "nameserver 192.168.88.2" > /etc/resolv.conf # 设置静态dns服务器
 
       1. `/etc/network/interfaces` 仅保留以下内容：
 
-        ```
-        auto lo
-        iface lo inet loopback
-        ```
+         ```
+         auto lo
+         iface lo inet loopback
+         ```
 
       2. `/etc/NetworkManager/NetworkManager.conf` 更改 **[ifupdown]** 条目中的 `managed` 值：
+
          ```
          [ifupdown]
          managed=false
