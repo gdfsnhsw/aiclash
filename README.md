@@ -217,7 +217,7 @@ echo "nameserver 192.168.88.2" > /etc/resolv.conf # 设置静态dns服务器
 
 配置文件
 
-[https://lancellc.gitbook.io/clash/whats-new/clash-tun-mode/clash-tun-mode-2/setup-for-redir-host-mode](https://lancellc.gitbook.io/clash/whats-new/clash-tun-mode/clash-tun-mode-2/setup-for-redir-host-mode)
+[Unofficial Clash Wiki](https://lancellc.gitbook.io/clash/clash-config-file/an-example-configuration-file)
 
 路由及防火墙设置
 
@@ -227,13 +227,13 @@ overturn DNS
 
 [overturn + clash in docker as dns server and transparent proxy gateway](https://gist.github.com/killbus/69fdabdd1d8ae8f4030f4f96307ffa1b)
 
-MOSDNS
+mosdns
 
 [插件化的 DNS 转发/分流器](https://github.com/IrineSistiana/mosdns)
 
-SUBCONVERTER
+subconverter
 
-[Utility to convert between various proxy subscription formats](https://github.com/IrineSistiana/mosdns)
+[Utility to convert between various proxy subscription formats](https://github.com/tindy2013/subconverter)
 
 宿主机配置
 
