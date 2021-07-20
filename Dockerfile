@@ -73,7 +73,7 @@ COPY supervisor/* /etc/supervisor.d/
 COPY scripts/* /usr/lib/clash/
 COPY entrypoint.sh /usr/local/bin/
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 ## iprange
 WORKDIR /src
