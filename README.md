@@ -1,5 +1,5 @@
 # all in clash
-使用clash +docker 进行路由转发实现全局透明代理
+使用moadns + subconverter + clash + docker 进行路由转发实现全局透明代理
 
 ## 食用方法
 1. 开启混杂模式
@@ -8,15 +8,11 @@
 
 1. docker创建网络,注意将网段改为你自己的
 
-    `docker network create -d macvlan --subnet=192.168.88.0/24 --gateway=192.168.88.1 -o parent=ens3 _dMACvLan`
+    `docker network create -d macvlan --subnet=192.168.88.0/24 --gateway=192.168.88.1 -o parent=ens192 _dMACvLan`
 
     *`_` 是为了提高 `_dMACvLan` 的优先级，可在多网络容器的中作为默认路由。
 
-1. 提前准备好正确的clash config
-
 1. 运行容器
-
-    `sudo docker run --name dfclash -d -v /your/path/clash_config:/clash_config  --network _dMACvLan --ip 192.168.88.2 gdfsnhsw/aiclash:latest`
 
     ```yaml
     version: '3.2'
@@ -31,12 +27,18 @@
             max-file: '3'
         restart: unless-stopped
         volumes:
-          - ./clash_config:/clash_config
+          - ./clash:/aiclash/clash
+          - ./subconverter:/aiclash/subconverter
+          - ./mosdns:/aiclash/mosdns
         environment:
           - TZ=Asia/Shanghai
-          - EN_MODE=redir-host
+          - DNS_MODE=redir-host
+          - CN_IP_ROUTE=true
           - ROUTE_MODE=redir-tun
-          #- LOCALNETWORK=127.0.0.0/8,10.0.0.0/8,192.168.0.0/16,224.0.0.0/4,172.16.0.0/12
+          - GET_CONFIG=true
+          - UDP=true
+          - SCRIPT=true
+          - URL=https://dler.cloud/aaa|trojan://密码@域名:443#名称
         cap_add:
           - NET_ADMIN
           - SYS_ADMIN
@@ -52,7 +54,7 @@
           name: _dMACvLan
     ```
 
-1. 将手机/电脑等客户端 网关设置为容器ip,如192.168.5.254 ,dns也设置成这个
+1. 将手机/电脑等客户端 网关设置为容器ip,如192.168.88.2 ,dns也设置成这个
 
 
 ## 附注 : 
