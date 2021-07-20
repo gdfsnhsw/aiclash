@@ -76,7 +76,7 @@ COPY entrypoint.sh /usr/local/bin/
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 ## iprange
-WORKDIR /src
+# WORKDIR /src
 RUN set -eux; \
     buildDeps=" \
         jq \
@@ -113,7 +113,7 @@ RUN set -eux; \
         $runDeps \
     ; \
     apk del .build-deps; \
-    rm -rf /src; \
+#     rm -rf /src; \
     \
     \
     # mosdns
