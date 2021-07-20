@@ -210,6 +210,8 @@ echo "nameserver 192.168.88.2" > /etc/resolv.conf # 设置静态dns服务器
 **参考资料**
 
 [docker_global_transparent_proxy](https://github.com/YouYII/docker_global_transparent_proxy)
+[clash-tproxy](https://github.com/silencebay/clash-tproxy)
+[clash-premium-installer](https://github.com/gdfsnhsw/clash-premium-installer)
 
 配置文件
 
