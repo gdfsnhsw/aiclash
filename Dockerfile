@@ -118,12 +118,12 @@ RUN set -eux; \
     \
     # mosdns
     \
-    mkdir /etc/mosdns; \
+    # mkdir /etc/mosdns; \
     \
     \
     # subconverter
     \
-    mkdir /etc/subconverter; \
+    # mkdir /etc/subconverter; \
     \
     \
     # clash
