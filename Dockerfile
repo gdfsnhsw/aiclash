@@ -116,6 +116,9 @@ RUN set -eux; \
     rm -rf /srv; \
     \
     \
+    mkdir /aiclash; \
+    \
+    \
     # mosdns
     \
     mkdir /aiclash/mosdns; \
