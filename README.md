@@ -27,9 +27,9 @@
             max-file: '3'
         restart: unless-stopped
         volumes:
-          - ./clash:/aiclash/clash
-          - ./subconverter:/aiclash/subconverter
-          - ./mosdns:/aiclash/mosdns
+          - ./aiclash/clash:/aiclash/clash
+          - ./aiclash/subconverter:/aiclash/subconverter
+          - ./aiclash/mosdns:/aiclash/mosdns
         environment:
           - TZ=Asia/Shanghai
           - DNS_MODE=redir-host        # clash的dns模式，redir-host or fake-ip
