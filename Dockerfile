@@ -100,7 +100,7 @@ RUN set -eux; \
         bash-doc \
         bash-completion \
         # eudev \
-	nftables \
+	      nftables \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -137,3 +137,4 @@ WORKDIR /clash_config
 
 ENTRYPOINT ["entrypoint.sh"]
 # CMD ["su", "-s", "/bin/bash", "-c", "/usr/local/bin/clash -d /clash_config", "nobody"]
+
