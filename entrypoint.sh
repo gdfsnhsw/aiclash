@@ -3,6 +3,7 @@
 set -e
 
 echo -e "\033[32m======================== 1. 安装修改系统文件 =========================\033[0m"
+mkdir -p /aiclash/clash
 mkdir -p /aiclash/mosdns
 mkdir -p /aiclash/subconverter
 # 开启转发，需要 privileged
