@@ -73,10 +73,7 @@ COPY supervisor/* /etc/supervisor.d/
 COPY scripts/* /usr/lib/clash/
 COPY entrypoint.sh /usr/local/bin/
 
-# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-
-## iprange
-# WORKDIR /src
+WORKDIR /aiclash
 RUN set -eux; \
     buildDeps=" \
         jq \
@@ -118,25 +115,24 @@ RUN set -eux; \
     \
     # mosdns
     \
-    mkdir /etc/mosdns; \
+    mkdir /aiclash/mosdns; \
     \
     \
     # subconverter
     \
-    mkdir /etc/subconverter; \
+    mkdir /aiclash/subconverter; \
     \
     \
     # clash
     \
+    mkdir /aiclash/clash; \
     chmod a+x /usr/local/bin/* /usr/lib/clash/*; \
     # dumped by `pscap` of package `libcap-ng-utils`
     setcap cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_mknod,cap_audit_write,cap_setfcap,cap_net_admin=+ep /usr/local/bin/clash
 
 
-WORKDIR /clash_config
+# WORKDIR /aiclash
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 ENTRYPOINT ["entrypoint.sh"]
-# CMD ["su", "-s", "/bin/bash", "-c", "/usr/local/bin/clash -d /clash_config", "nobody"]
-
