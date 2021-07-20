@@ -81,13 +81,6 @@ RUN set -eux; \
     buildDeps=" \
         jq \
         git \
-        autoconf \
-        automake \
-        libtool \
-        help2man \
-        build-base \
-        bash \
-        iproute2 \
     "; \
     runDeps=" \
         bash \
