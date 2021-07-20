@@ -227,6 +227,14 @@ overturn DNS
 
 [overturn + clash in docker as dns server and transparent proxy gateway](https://gist.github.com/killbus/69fdabdd1d8ae8f4030f4f96307ffa1b)
 
+MOSDNS
+
+[插件化的 DNS 转发/分流器](https://github.com/IrineSistiana/mosdns)
+
+SUBCONVERTER
+
+[Utility to convert between various proxy subscription formats](https://github.com/IrineSistiana/mosdns)
+
 宿主机配置
 
 https://github.com/fanyh123/tproxy-gateway
