@@ -1,6 +1,6 @@
 #!/bin/bash
 
-formyairportPath=/etc/subconverter/profiles/formyairport.ini
+formyairportPath=/aiclash/subconverter/profiles/formyairport.ini
 clashconfigPath=/aiclash/clash/config.yaml
 
 setconfig(){
