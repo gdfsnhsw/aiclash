@@ -78,17 +78,17 @@ COPY entrypoint.sh /usr/local/bin/
 ## iprange
 WORKDIR /src
 RUN set -eux; \
-    buildDeps=" \
-        jq \
-        git \
-        autoconf \
-        automake \
-        libtool \
-        help2man \
-        build-base \
-        bash \
-        iproute2 \
-    "; \
+#    buildDeps=" \
+#        jq \
+#        git \
+#        autoconf \
+#        automake \
+#        libtool \
+#        help2man \
+#        build-base \
+#        bash \
+#        iproute2 \
+#    "; \
     runDeps=" \
         bash \
         iproute2 \
@@ -103,16 +103,16 @@ RUN set -eux; \
         supervisor \
     "; \
     \
-    apk add --no-cache --virtual .build-deps \
-        $buildDeps \
-        $runDeps \
-    ; \
+#    apk add --no-cache --virtual .build-deps \
+#        $buildDeps \
+#        $runDeps \
+#    ; \
     \
     \
     apk add --no-network --virtual .run-deps \
         $runDeps \
     ; \
-    apk del .build-deps; \
+#    apk del .build-deps; \
     rm -rf /src; \
     \
     \
