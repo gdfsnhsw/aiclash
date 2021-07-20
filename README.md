@@ -59,8 +59,11 @@
 
 ## 附注 : 
 
-1. 只要规则设置的对, 支持国内直连,国外走代理
-1. 只在linux 测试过,win没试过, mac是不行, 第二步创建网络不行, docker自己的问题, 说不定以后哪天docker for mac支持了?
+1. redir-tun混合模式,Redirect TCP and transfer UDP to utun device
+2. tun模式,Transfer TCP and UDP to utun device
+3. tproxy模式,TProxy TCP and TProxy UDP
+4. 只要规则设置的对, 支持国内直连,国外走代理
+5. 只在linux 测试过,win没试过, mac是不行, 第二步创建网络不行, docker自己的问题, 说不定以后哪天docker for mac支持了?
 
 ## 设置客户端
 设置客户端（或设置路由器DHCP）默认网关及DNS服务器为容器IP:192.168.88.2
