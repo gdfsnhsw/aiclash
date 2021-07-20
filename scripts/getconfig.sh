@@ -1,7 +1,6 @@
 #!/bin/bash
 
-formyairportPath=/aiclash/subconverter/profiles/formyairport.ini
-configPath=/aiclash/clash/config.yaml
+formyairportPath=/etc/subconverter/profiles/formyairport.ini
 
 setconfig(){
 	#参数1代表变量名，参数2代表变量值,参数3即文件路径
@@ -11,9 +10,9 @@ setconfig(){
 
 getconfig(){
     if [ "$DNS_MODE" = "redir-host" ]; then
-    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $configPath
+    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O config.yaml
     else
-    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $configPath
+    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O config.yaml
     fi
 }
 
