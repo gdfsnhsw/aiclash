@@ -75,8 +75,8 @@ COPY entrypoint.sh /usr/local/bin/
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
-## iprange
-WORKDIR /src
+
+WORKDIR /aiclash
 RUN set -eux; \
     buildDeps=" \
         jq \
@@ -113,17 +113,17 @@ RUN set -eux; \
         $runDeps \
     ; \
     apk del .build-deps; \
-    rm -rf /src; \
+    rm -rf /aiclash; \
     \
     \
     # mosdns
     \
-    mkdir /etc/mosdns; \
+    mkdir /aiclash/mosdns; \
     \
     \
     # subconverter
     \
-    mkdir /etc/subconverter; \
+    mkdir /aiclash/subconverter; \
     \
     \
     # clash
@@ -133,7 +133,7 @@ RUN set -eux; \
     setcap cap_chown,cap_dac_override,cap_fowner,cap_fsetid,cap_kill,cap_setgid,cap_setuid,cap_setpcap,cap_net_bind_service,cap_net_raw,cap_sys_chroot,cap_mknod,cap_audit_write,cap_setfcap,cap_net_admin=+ep /usr/local/bin/clash
 
 
-WORKDIR /clash_config
+# WORKDIR /clash_config
 
 ENTRYPOINT ["entrypoint.sh"]
 # CMD ["su", "-s", "/bin/bash", "-c", "/usr/local/bin/clash -d /clash_config", "nobody"]
