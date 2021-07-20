@@ -81,6 +81,13 @@ RUN set -eux; \
     buildDeps=" \
         jq \
         git \
+        autoconf \
+        automake \
+        libtool \
+        help2man \
+        build-base \
+        bash \
+        iproute2 \
     "; \
     runDeps=" \
         bash \
@@ -92,7 +99,8 @@ RUN set -eux; \
         bind-tools \
         bash-doc \
         bash-completion \
-        nftables \
+        # eudev \
+	nftables \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
