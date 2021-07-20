@@ -32,19 +32,19 @@
           - ./mosdns:/aiclash/mosdns
         environment:
           - TZ=Asia/Shanghai
-          - DNS_MODE=redir-host
-          - CN_IP_ROUTE=true
-          - ROUTE_MODE=redir-tun
-          - GET_CONFIG=true
-          - UDP=true
-          - SCRIPT=true
-          - URL=https://dler.cloud/aaa|trojan://密码@域名:443#名称
+          - DNS_MODE=redir-host                                     # clash的dns模式，redir-host or fake-ip
+          - CN_IP_ROUTE=true                                        # 是否绕过中国大陆ip，true or false
+          - ROUTE_MODE=redir-tun                                    # 路由模式，redir-tun or tun or tproxy
+          - GET_CONFIG=true                                         # 是否启用subconverter生成clash配置文件，true or false
+          - UDP=true                                                # 是否开启udp，true or false 
+          - SCRIPT=true                                             # 是否开启脚本模式，true or flase  
+          - URL=https://dler.cloud/aaa|trojan://密码@域名:443#名称    # 订阅链接，合成一份，将多个订阅合成一份，使用 '|' 来分隔链接
         cap_add:
           - NET_ADMIN
           - SYS_ADMIN
         networks:
           dMACvLAN:
-            ipv4_address: 192.168.88.2
+            ipv4_address: 192.168.88.2                              # 容器ip
         dns:
           - 114.114.114.114
 
