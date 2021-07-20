@@ -99,8 +99,8 @@ RUN set -eux; \
         bind-tools \
         bash-doc \
         bash-completion \
-        # eudev \
-	      nftables \
+        nftables \
+        supervisor \
     "; \
     \
     apk add --no-cache --virtual .build-deps \
