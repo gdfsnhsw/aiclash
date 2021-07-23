@@ -22,6 +22,9 @@ cn_setup(){
 
     ip addr
     
+    echo -e "\033[32mclash服务已启动！\033[0m"
+    echo -e "\033[32m请使用 http://<容器ip>:9090/ui 管理内置规则\033[0m"
+    
     #sysctl -w net/ipv4/ip_forward=1
 
     exit 0
@@ -68,6 +71,9 @@ setup(){
 EOF
 
     ip addr
+    
+    echo -e "\033[32mclash服务已启动！\033[0m"
+    echo -e "\033[32m请使用 http://<容器ip>:9090/ui 管理内置规则\033[0m"
     
     #sysctl -w net/ipv4/ip_forward=1
 
