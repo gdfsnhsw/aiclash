@@ -36,7 +36,7 @@ aiclashstart(){
 	echo -e "\033[44m             欢迎使用AIClash             \033[0m"
 	echo -----------------------------------------------
 	echo -e "  1.更新\033[34m配置文件\033[0m"
-  echo -e "  2.生成\033[33m订阅模版\033[0m"
+        echo -e "  2.生成\033[33m订阅模版\033[0m"
  	echo -e "  3.\033[35m重启\033[0m"clash
 	echo -e "  4.设置\033[32m定时任务\033[0m"
 	echo -----------------------------------------------
@@ -46,16 +46,16 @@ aiclashstart(){
 	if [ "$num" = 1 ];then
 	  getyaml
 	elif [ "$num" = 2 ];then	  
-  	getlink
+  	  getlink
 	elif [ "$num" = 3 ];then
-  	supervisorctl restart clash
+  	  supervisorctl restart clash
 	elif [ "$num" = 4 ];then
-  	clashcron
+  	  clashcron
 	elif [ "$num" = q ];then
-    exit 0
+          exit 0
 	else
-    errornum
-    aiclashstart
+          errornum
+          aiclashstart
 	fi
 }
 
@@ -72,17 +72,17 @@ clashrestart(){
 
 getudp(){
 	echo -----------------------------------------------
-    read -p "是否开启udp？[1/0] > " res
+        read -p "是否开启udp？[1/0] > " res
 	if [ "$res" = '1' ]; then
-    sed -i '/udp=*/'d $formyairportPath
-  	setconfig udp true	
+          sed -i '/udp=*/'d $formyairportPath
+  	  setconfig udp true	
 	elif [ "$res" = '0' ]; then
-    sed -i '/udp=*/'d $formyairportPath
-		setconfig udp false
-  else
-    errornum
-    getudp
-  fi
+          sed -i '/udp=*/'d $formyairportPath
+	  setconfig udp false
+        else
+          errornum
+          getudp
+        fi
 }
 
 linkconfig(){
@@ -95,35 +95,35 @@ linkconfig(){
 	echo 6	ACL4SSR精简版+去广告加强
 	echo 7	ACL4SSR重度全分组+奈飞分流
 	echo 8	ACL4SSR重度全分组+去广告加强
-  echo -----------------------------------------------
+        echo -----------------------------------------------
 	read -p "请输入对应数字[1-8] > " num
 	if [ "$num" = 1 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config profiles/yuanlam.ini  
+          sed -i '/config=*/'d $formyairportPath
+	  setconfig config profiles/yuanlam.ini  
 	elif [ "$num" = 2 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config profiles/Loyalsoldier.ini
+          sed -i '/config=*/'d $formyairportPath
+	  setconfig config profiles/Loyalsoldier.ini
 	elif [ "$num" = 3 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_NoReject.ini
+          sed -i '/config=*/'d $formyairportPath
+          setconfig config config/ACL4SSR_Online_NoReject.ini
 	elif [ "$num" = 4 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_Mini_MultiMode.ini	  
+          sed -i '/config=*/'d $formyairportPath
+          setconfig config config/ACL4SSR_Online_Mini_MultiMode.ini	  
 	elif [ "$num" = 5 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_AdblockPlus.ini
+          sed -i '/config=*/'d $formyairportPath
+	  setconfig config config/ACL4SSR_Online_AdblockPlus.ini
 	elif [ "$num" = 6 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_Mini_AdblockPlus.ini  
+          sed -i '/config=*/'d $formyairportPath
+          setconfig config config/ACL4SSR_Online_Mini_AdblockPlus.ini  
 	elif [ "$num" = 7 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_Full_Netflix.ini
+          sed -i '/config=*/'d $formyairportPath
+          setconfig config config/ACL4SSR_Online_Full_Netflix.ini
 	elif [ "$num" = 8 ];then
-    sed -i '/config=*/'d $formyairportPath
-		setconfig config config/ACL4SSR_Online_Full_AdblockPlus.ini
-  else
-    errornum
-    linkconfig			  
+          sed -i '/config=*/'d $formyairportPath
+          setconfig config config/ACL4SSR_Online_Full_AdblockPlus.ini
+        else
+          errornum
+          linkconfig			  
 	fi
 }
 
