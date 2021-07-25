@@ -10,11 +10,11 @@ setconfig(){
 }
 
 getconfig(){
-    if [ "$DNS_MODE" = "redir-host" ]; then
-    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $clashconfigPath
-    else
-    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $clashconfigPath
-    fi
+	if [ "$DNS_MODE" = "redir-host" ]; then
+		wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $clashconfigPath
+	else
+		wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $clashconfigPath
+	fi
 }
 
 sed -i '/url=*/'d $formyairportPath
@@ -27,12 +27,12 @@ sed -i '/script=*/'d $formyairportPath
 setconfig script $SCRIPT
 
 while true; do
-    supervisorctl status subconverter
-    [ $? -eq 0 ] && \
-    getconfig && \
-    break
-    echo -e "\033[32m正在启动subconverter并生成clash配置文件，请等待...\033[0m"
-    sleep 3
+	supervisorctl status subconverter
+	[ $? -eq 0 ] && \
+	getconfig && \
+	break
+	echo -e "\033[32m正在启动subconverter并生成clash配置文件，请等待...\033[0m"
+	sleep 3
 done
 
 supervisorctl restart clash
