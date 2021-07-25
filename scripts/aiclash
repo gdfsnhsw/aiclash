@@ -16,7 +16,7 @@ yamlPathnew=/tmp/clash_config.yaml
 #clash核心位置
 clashcorePath=/usr/local/bin/clash
 #subc.sh位置
-subcPath=/srv/subconverter/profiles/subc.sh
+aiclashPath=/aiclash/aiclash
 #clash重启命令
 #supervisorctl restart clash  
 #systemctl restart clash.service
@@ -323,7 +323,7 @@ clashcron(){
 		clashcron
 	elif [ "$num" = 4 ]; then	
 		cronname=更新订阅链接
-		cronset="$subcPath updateyaml"
+		cronset="$aiclashPath updateyaml"
 		setcron	
 		clashcron
 	else
