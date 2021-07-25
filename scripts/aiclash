@@ -15,7 +15,7 @@ yamlPathbak=$clashPath/config.yaml.bak
 yamlPathnew=/tmp/clash_config.yaml
 #clash核心位置
 clashcorePath=/usr/local/bin/clash
-#subc.sh位置
+#aiclash.sh位置
 aiclashPath=/aiclash/aiclash
 #clash重启命令
 #supervisorctl restart clash  
