@@ -2,11 +2,11 @@
 
 ####定义目录####
 #clash目录文件位置
-clashPath=/srv/clash
+clashPath=/aiclash/clash
 #subconverter配置档案
-formyairportPath=/srv/subconverter/profiles/formyairport.ini
+formyairportPath=/aiclash/subconverter/profiles/formyairport.ini
 #subconverter配置档案备份
-formyairportPathbak=/srv/subconverter/profiles/formyairport.ini.bak
+formyairportPathbak=/aiclash/subconverter/profiles/formyairport.ini.bak
 #clash配置文件
 yamlPath=$clashPath/config.yaml
 #clash配置文件备份
@@ -17,8 +17,6 @@ yamlPathnew=/tmp/clash_config.yaml
 clashcorePath=/usr/bin/clash
 #subc.sh位置
 subcPath=/srv/subconverter/profiles/subc.sh
-#判断clash进程是否运行
-PIDS=`ps -ef|grep "$clashcorePath"|grep -v grep`
 #clash重启命令
 #supervisorctl restart clash  
 #systemctl restart clash.service
