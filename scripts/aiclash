@@ -95,7 +95,7 @@ getscript(){
                 setconfig script false
         else
                 errornum
-                getudp
+                getscript
         fi
 }
 
