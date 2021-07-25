@@ -43,19 +43,19 @@ aiclashstart(){
 	echo -e "  q.\033[36m退出\033[0m"
 	echo -----------------------------------------------
 	read -p "请输入对应数字 > " num
-	if [ "$num" = 1 ];then
-	  getyaml
+        if [ "$num" = 1 ];then
+                getyaml
 	elif [ "$num" = 2 ];then	  
-  	  getlink
+                getlink
 	elif [ "$num" = 3 ];then
-  	  supervisorctl restart clash
+                supervisorctl restart clash
 	elif [ "$num" = 4 ];then
-  	  clashcron
+                clashcron
 	elif [ "$num" = q ];then
-          exit 0
+                exit 0
 	else
-          errornum
-          aiclashstart
+                errornum
+                aiclashstart
 	fi
 }
 
@@ -63,9 +63,9 @@ clashrestart(){
 	echo -----------------------------------------------
         read -p "是否重启clash？[1/0] > " res
 	if [ "$res" = '1' ]; then
-	  supervisorctl restart clash	
+                supervisorctl restart clash	
 	elif [ "$res" = '0' ]; then
-	  aiclashstart
+                aiclashstart
         fi
 }
 
@@ -73,14 +73,14 @@ getudp(){
 	echo -----------------------------------------------
         read -p "是否开启udp？[1/0] > " res
 	if [ "$res" = '1' ]; then
-          sed -i '/udp=*/'d $formyairportPath
-  	  setconfig udp true	
+                sed -i '/udp=*/'d $formyairportPath
+                setconfig udp true	
 	elif [ "$res" = '0' ]; then
-          sed -i '/udp=*/'d $formyairportPath
-	  setconfig udp false
+                sed -i '/udp=*/'d $formyairportPath
+                setconfig udp false
         else
-          errornum
-          getudp
+                errornum
+                getudp
         fi
 }
 
@@ -97,32 +97,32 @@ linkconfig(){
         echo -----------------------------------------------
 	read -p "请输入对应数字[1-8] > " num
 	if [ "$num" = 1 ];then
-          sed -i '/config=*/'d $formyairportPath
-	  setconfig config profiles/yuanlam.ini  
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config profiles/yuanlam.ini  
 	elif [ "$num" = 2 ];then
-          sed -i '/config=*/'d $formyairportPath
-	  setconfig config profiles/Loyalsoldier.ini
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config profiles/Loyalsoldier.ini
 	elif [ "$num" = 3 ];then
-          sed -i '/config=*/'d $formyairportPath
-          setconfig config config/ACL4SSR_Online_NoReject.ini
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_NoReject.ini
 	elif [ "$num" = 4 ];then
-          sed -i '/config=*/'d $formyairportPath
-          setconfig config config/ACL4SSR_Online_Mini_MultiMode.ini	  
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_Mini_MultiMode.ini	  
 	elif [ "$num" = 5 ];then
-          sed -i '/config=*/'d $formyairportPath
-	  setconfig config config/ACL4SSR_Online_AdblockPlus.ini
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_AdblockPlus.ini
 	elif [ "$num" = 6 ];then
-          sed -i '/config=*/'d $formyairportPath
-          setconfig config config/ACL4SSR_Online_Mini_AdblockPlus.ini  
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_Mini_AdblockPlus.ini  
 	elif [ "$num" = 7 ];then
-          sed -i '/config=*/'d $formyairportPath
-          setconfig config config/ACL4SSR_Online_Full_Netflix.ini
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_Full_Netflix.ini
 	elif [ "$num" = 8 ];then
-          sed -i '/config=*/'d $formyairportPath
-          setconfig config config/ACL4SSR_Online_Full_AdblockPlus.ini
+                sed -i '/config=*/'d $formyairportPath
+                setconfig config config/ACL4SSR_Online_Full_AdblockPlus.ini
         else
-          errornum
-          linkconfig			  
+                errornum
+                linkconfig			  
 	fi
 }
 
@@ -135,31 +135,31 @@ getlink(){
 	read -p "请输入完整链接 > " link
 	test=$(echo $link | grep "://")
         if [ -n "$link" -a -n "$test" ];then
-		echo -----------------------------------------------
+                echo -----------------------------------------------
 		echo -e 请检查输入的链接是否正确：
 		echo -e "\033[32m$link\033[0m"
 		echo -----------------------------------------------
 		read -p "确认导入订阅链接？[1/0] > " res
-			if [ "$res" = '1' ]; then
-                          mkyamlbak
-			  sed -i '/url=*/'d $formyairportPath
-			  setconfig url $link
-                          getudp
-                          linkconfig
-                          echo -----------------------------------------------
-                          echo -e   "\033[44m订阅模版完成，请选择<1.更新配置文件>\033[0m"
-                          aiclashstart
-			elif [ "$res" = '0' ]; then
-                          getlink
+                        if [ "$res" = '1' ]; then
+                                mkyamlbak
+                                sed -i '/url=*/'d $formyairportPath
+                                setconfig url $link
+                                getudp
+                                linkconfig
+                                echo -----------------------------------------------
+                                echo -e   "\033[44m订阅模版完成，请选择<1.更新配置文件>\033[0m"
+                                aiclashstart
+                        elif [ "$res" = '0' ]; then
+                                getlink
                         else
-                          errornum
-                          aiclashstart
+                                errornum
+                                aiclashstart
                         fi
         else
-          echo -----------------------------------------------
-          echo -e "\033[31m请输入正确的配置文件链接地址！！！\033[0m"
-          sleep 1
-          aiclashstart
+                echo -----------------------------------------------
+                echo -e "\033[31m请输入正确的配置文件链接地址！！！\033[0m"
+                sleep 1
+                aiclashstart
         fi
 }
 
@@ -169,26 +169,25 @@ mkyamlbak(){
 cat << EOF > /tmp/config.yaml
 mixed-port: 7890
 EOF
-        mv /tmp/config.yaml $yamlPath 
-        cp -r $yamlPath $yamlPathbak
-        cp -r $formyairportPath $formyairportPathbak
+                mv /tmp/config.yaml $yamlPath 
+                cp -r $yamlPath $yamlPathbak
+                cp -r $formyairportPath $formyairportPathbak
         fi
 }
 
 
 keepyaml(){
         if [ -s $yamlPathnew  ];then
-        cp -r $yamlPathnew $yamlPath
-        echo -e "\033[32m已成功获取配置文件！\033[0m"
-        rm -rf $yamlPathnew
-        supervisorctl restart clash
-        keepyaml2
+                cp -r $yamlPathnew $yamlPath
+                echo -e "\033[32m已成功获取配置文件！\033[0m"
+                rm -rf $yamlPathnew
+                supervisorctl restart clash
         else
-          echo -----------------------------------------------
-          echo -e "\033[32m创建配置文件失败！请选择<2.生成订阅模版>\033[0m"
-          echo -----------------------------------------------
-          rm -rf $yamlPathnew 
-          aiclashstart
+                echo -----------------------------------------------
+                echo -e "\033[32m创建配置文件失败！请选择<2.生成订阅模版>\033[0m"
+                echo -----------------------------------------------
+                rm -rf $yamlPathnew 
+                aiclashstart
          fi
 }
 
@@ -197,11 +196,11 @@ getyaml(){
         echo -e "\033[32m正在创建配置文件\033[0m"
         echo -----------------------------------------------
         if [ "$DNS_MODE" = "redir-host" ]; then
-          wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $yamlPathnew
+                wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $yamlPathnew
         else
-          wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $yamlPathnew
+                wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $yamlPathnew
         fi
-          keepyaml
+                keepyaml
 }
 
 clashcron(){
