@@ -38,7 +38,12 @@ fi
 
 if [ ! -e '/aiclash/getconfig.sh' ]; then
     cp  /usr/lib/clash/getconfig.sh /aiclash/getconfig.sh
-    echo -e "载入shell.sh"   
+    echo -e "载入getconfig.sh"   
+fi
+
+if [ ! -e '/aiclash/aiclash' ]; then
+    cp  /usr/lib/clash/aiclash /aiclash/aiclash
+    echo -e "载入aiclash"   
 fi
 
 if [ ! -e '/aiclash/mosdns/config.yaml' ]; then
