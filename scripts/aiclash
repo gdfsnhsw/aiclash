@@ -100,10 +100,10 @@ linkconfig(){
 	read -p "请输入对应数字[1-8] > " num
 	if [ "$num" = 1 ];then
     sed -i '/config=*/'d $formyairportPath
-		setconfig config config/yuanlam.ini  
+		setconfig config profiles/yuanlam.ini  
 	elif [ "$num" = 2 ];then
     sed -i '/config=*/'d $formyairportPath
-		setconfig config config/Loyalsoldier.ini
+		setconfig config profiles/Loyalsoldier.ini
 	elif [ "$num" = 3 ];then
     sed -i '/config=*/'d $formyairportPath
 		setconfig config config/ACL4SSR_Online_NoReject.ini
