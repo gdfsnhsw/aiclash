@@ -15,11 +15,10 @@ yamlPathbak=$clashPath/config.yaml.bak
 yamlPathnew=/tmp/clash_config.yaml
 #clash核心位置
 clashcorePath=/usr/local/bin/clash
-#aiclash.sh位置
+#subc.sh位置
 aiclashPath=/aiclash/aiclash
 #clash重启命令
 #supervisorctl restart clash  
-#systemctl restart clash.service
 
 setconfig(){
 	#参数1代表变量名，参数2代表变量值,参数3即文件路径
@@ -32,12 +31,12 @@ errornum(){
 	echo -e "\033[31m请输入正确的数字！\033[0m"
 }
 
-subcstart(){
+aiclashstart(){
 	echo -----------------------------------------------
-	echo -e "\033[44m             欢迎使用aiclash             \033[0m"
+	echo -e "\033[44m             欢迎使用AIClash             \033[0m"
 	echo -----------------------------------------------
 	echo -e "  1.更新\033[34m配置文件\033[0m"
-        echo -e "  2.生成\033[33m订阅模版\033[0m"
+  echo -e "  2.生成\033[33m订阅模版\033[0m"
  	echo -e "  3.\033[35m重启\033[0m"clash
 	echo -e "  4.设置\033[32m定时任务\033[0m"
 	echo -----------------------------------------------
@@ -47,16 +46,16 @@ subcstart(){
 	if [ "$num" = 1 ];then
 	  getyaml
 	elif [ "$num" = 2 ];then	  
-  	  getlink
+  	getlink
 	elif [ "$num" = 3 ];then
-  	  supervisorctl restart clash
+  	supervisorctl restart clash
 	elif [ "$num" = 4 ];then
-  	  clashcron
+  	clashcron
 	elif [ "$num" = q ];then
     exit 0
 	else
     errornum
-    subcstart
+    aiclashstart
 	fi
 }
 
@@ -66,7 +65,7 @@ clashrestart(){
 	if [ "$res" = '1' ]; then
 	  supervisorctl restart clash	
 	elif [ "$res" = '0' ]; then
-	  subcstart
+	  aiclashstart
   fi
 
 }
@@ -150,18 +149,18 @@ getlink(){
 				linkconfig
         echo -----------------------------------------------
         echo -e   "\033[44m订阅模版完成，请选择<1.更新配置文件>\033[0m"
-        subcstart
+        aiclashstart
 			elif [ "$res" = '0' ]; then
 				getlink
       else
 	    	errornum
-        subcstart
+        aiclashstart
       fi
 	else
 		echo -----------------------------------------------
 		echo -e "\033[31m请输入正确的配置文件链接地址！！！\033[0m"
 		sleep 1
-    subcstart
+    aiclashstart
 	fi
 }
 
@@ -177,19 +176,6 @@ EOF
   fi
 }
 
-keepyaml2(){
-  if [ "$PIDS" = "" ]; then
-    echo -----------------------------------------------
-    echo -e clash启动失败，还原配置文件
-    cp -r $yamlPathbak $yamlPath
-    cp -r $formyairportPathbak $formyairportPath
-    supervisorctl restart clash
-  else
-    echo -----------------------------------------------
-    echo -e clash启动成功，http://localhost:9090/ui/
-    echo -----------------------------------------------
-  fi
-}
 
 keepyaml(){
 		if [ -s $yamlPathnew  ];then
@@ -203,15 +189,19 @@ keepyaml(){
 			echo -e "\033[32m创建配置文件失败！请选择<2.生成订阅模版>\033[0m"
 			echo -----------------------------------------------
       rm -rf $yamlPathnew 
-			subcstart
+			aiclashstart
 		fi
 }
 
 getyaml(){
     mkyamlbak  
-	echo -e "\033[32m正在创建配置文件\033[0m"
+	  echo -e "\033[32m正在创建配置文件\033[0m"
     echo -----------------------------------------------
-    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password" -O $yamlPathnew
+    if [ "$DNS_MODE" = "redir-host" ]; then
+    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=redir-host" -O $yamlPathnew
+    else
+    wget "http://127.0.0.1:25500/getprofile?name=profiles/formyairport.ini&token=password&dns_mode=fake-ip" -O $yamlPathnew
+    fi
     keepyaml
 }
 
@@ -305,7 +295,7 @@ clashcron(){
 	if [ -z "$num" ]; then 
 		errornum
 	elif [ "$num" = 0 ]; then
-		subcstart
+		aiclashstart
 	elif [ "$num" = 1 ]; then
 		cronname=重启clash服务
 		cronset="supervisorctl restart clash"
@@ -338,4 +328,4 @@ updateyaml)
 		;;
 esac
 
-subcstart
+aiclashstart
