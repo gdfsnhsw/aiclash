@@ -6,7 +6,11 @@ echo -e "\033[32m======================== 1. 安装修改系统文件 ==========
 # 开启转发，需要 privileged
 # Deprecated! 容器默认已开启
 echo "1" > /proc/sys/net/ipv4/ip_forward
-echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
+
+cat << EOF > /etc/resolv.conf
+nameserver 127.0.0.1
+EOF
+
 apk add supervisor
 
 echo -e "\033[32m======================== 2. 载入所需文件 ============================\033[0m"
