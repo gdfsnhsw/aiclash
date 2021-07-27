@@ -36,7 +36,7 @@ aiclashstart(){
 	echo -e "\033[44m             欢迎使用AIClash             \033[0m"
 	echo -----------------------------------------------
 	echo -e "  1.更新\033[34m配置文件\033[0m"
-        echo -e "  2.生成\033[33m订阅模版\033[0m"
+        echo -e "  2.配置\033[33m订阅模版\033[0m"
  	echo -e "  3.\033[35m重启\033[0m"clash
 	echo -e "  4.设置\033[32m定时任务\033[0m"
 	echo -----------------------------------------------
@@ -46,7 +46,7 @@ aiclashstart(){
         if [ "$num" = 1 ];then
                 getyaml
 	elif [ "$num" = 2 ];then	  
-                getlink
+                getsubc
 	elif [ "$num" = 3 ];then
                 supervisorctl restart clash
 	elif [ "$num" = 4 ];then
@@ -178,6 +178,26 @@ getlink(){
                 aiclashstart
         fi
 }
+
+getsubc(){
+        read -p "是否重新配置文件？[1/0] > " res
+        if [ "$res" = '1' ]; then
+                mkyamlbak
+                getudp
+                getscript
+                linkconfig
+                echo -----------------------------------------------
+                echo -e   "\033[44m订阅模版完成，请选择<1.更新配置文件>\033[0m"
+                aiclashstart
+        elif [ "$res" = '0' ]; then
+                aiclashstart
+        else
+                errornum
+                aiclashstart
+        fi
+
+}
+
 
 mkyamlbak(){
         mkdir -p $clashPath
