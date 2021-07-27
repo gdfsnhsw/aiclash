@@ -9,7 +9,11 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 
 apk add supervisor
 
-echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
+cat << EOF > /etc/resolv.conf
+nameserver ${dns}
+EOF
+
+# echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
 
 echo -e "\033[32m======================== 2. 载入所需文件 ============================\033[0m"
 if [ ! -e '/aiclash/subconverter/subconverter' ] ; then
