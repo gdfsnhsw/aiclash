@@ -86,7 +86,7 @@ getudp(){
 
 getscript(){
 	echo -----------------------------------------------
-        read -p "是否启用script模式？[1/0] > " res
+        read -p "代理模式:script[1]/rule[0] > " res
 	if [ "$res" = '1' ]; then
                 sed -i '/script=*/'d $formyairportPath
                 setconfig script true	
