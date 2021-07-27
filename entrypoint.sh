@@ -10,7 +10,7 @@ echo "1" > /proc/sys/net/ipv4/ip_forward
 apk add supervisor
 
 cat << EOF > /etc/resolv.conf
-nameserver ${dns}
+nameserver 223.5.5.5
 EOF
 
 # echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
