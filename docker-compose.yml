@@ -31,6 +31,8 @@ services:
         ipv4_address: 192.168.88.2
     dns:
       - 114.114.114.114
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
 
 networks:
   dMACvLAN:
