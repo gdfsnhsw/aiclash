@@ -40,8 +40,6 @@ setup(){
         sleep 3
     done
     
-    nft flush ruleset
-    
 #    ip tuntap add utun mode tun user nobody
 #    ip link set utun up
 #    ip addr add "198.18.0.1/16" dev utun
