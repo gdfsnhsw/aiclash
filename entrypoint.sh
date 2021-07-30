@@ -11,6 +11,7 @@ apk add supervisor
 
 cat << EOF > /etc/resolv.conf
 nameserver 223.5.5.5
+nameserver 8.8.8.8
 EOF
 
 # echo 'nameserver 223.5.5.5'>>/etc/resolv.conf
