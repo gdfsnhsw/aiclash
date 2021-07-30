@@ -39,7 +39,9 @@ setup(){
         echo -e "\033[32m正在启动clash，请等待...\033[0m"
         sleep 3
     done
-
+    
+    nft flush ruleset
+    
 #    ip tuntap add utun mode tun user nobody
 #    ip link set utun up
 #    ip addr add "198.18.0.1/16" dev utun
@@ -50,7 +52,6 @@ setup(){
     ip rule add fwmark 114514 lookup 114
 
     nft -f - << EOF
-    flush ruleset
     define LOCAL_SUBNET = { 10.0.0.0/8, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.168.0.0/16, 224.0.0.0/4, 240.0.0.0/4 }
     table clash
     flush table clash
