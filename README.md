@@ -36,8 +36,6 @@
           - CN_IP_ROUTE=true           # 是否绕过中国大陆ip，true or false
           - ROUTE_MODE=redir-tun       # 路由模式，redir-tun or tun or tproxy
           - GET_CONFIG=true            # 是否生成clash配置文件，true or false
-          - UDP=true                   # 是否开启udp，true or false 
-          - SCRIPT=true                # 是否开启脚本模式，true or flase  
           - URL=https://~|trojan://~   # 订阅链接，将多个订阅合成一份，使用 '|' 来分隔链接
         cap_add:
           - NET_ADMIN
