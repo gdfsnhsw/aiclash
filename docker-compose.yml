@@ -20,6 +20,8 @@ services:
       - CN_IP_ROUTE=true
       - ROUTE_MODE=redir-tun
       - GET_CONFIG=true
+      - UDP=true
+      - SCRIPT=true
       - URL=https://dler.cloud/aaa|trojan://密码@域名:443#名称
     cap_add:
       - NET_ADMIN
