@@ -1,5 +1,5 @@
 # all in clash
-使用moadns + subconverter + clash + docker 进行路由转发实现全局透明代理
+使用moadns + subconverter + clash + docker 进行路由转发实现全局透明代理。
 
 ## 食用方法
 1. 开启混杂模式
