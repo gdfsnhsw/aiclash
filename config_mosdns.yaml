@@ -57,20 +57,40 @@ plugin:
 ################ 解析服务器插件 #################
   
 ##### 解析直连域名的插件，direct #####
+#   - tag: forward_direct
+#     type: fast_forward                   
+#     args:    
+#       upstream:     
+#         - addr: tls://119.29.29.29
+#           timeout: 2
+#           trusted: true
+#           idle_timeout: 1000
+#           max_conns: 10
+#         - addr: tls://223.6.6.6
+#           timeout: 2
+#           trusted: true
+#           idle_timeout: 1000
+#           max_conns: 10
+
   - tag: forward_direct
     type: fast_forward                   
     args:    
       upstream:     
-        - addr: tls://119.29.29.29
-          timeout: 2
+        - addr: 119.29.29.29
           trusted: true
-          idle_timeout: 1000
-          max_conns: 10
-        - addr: tls://223.6.6.6
-          timeout: 2
+          idle_timeout: 30
+          max_conns: 5
+        - addr: 223.6.6.6
           trusted: true
-          idle_timeout: 1000
-          max_conns: 10
+          idle_timeout: 30
+          max_conns: 5
+        - addr: 114.114.114.114
+          trusted: true
+          idle_timeout: 30
+          max_conns: 5          
+      timeout: 2
+      deduplicate: true
+      
 ##### 解析代理域名的插件，clash #####
   - tag: forward_clash
     type: fast_forward
