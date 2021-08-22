@@ -51,7 +51,7 @@ RUN set -eux; \
     echo "}" >> chnroute.nft;
     
 # FROM --platform=$TARGETPLATFORM alpine:3.13 AS runtime
-FROM --platform=$TARGETPLATFORM alpine:latest AS runtime
+FROM --platform=$TARGETPLATFORM alpine AS runtime
 LABEL org.opencontainers.image.source https://silencebay@github.com/silencebay/clash-tproxy.git
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
