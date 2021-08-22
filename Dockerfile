@@ -50,7 +50,8 @@ RUN set -eux; \
     cat raw | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' | sed s/$/,/g >> chnroute.nft; \
     echo "}" >> chnroute.nft;
     
-FROM --platform=$TARGETPLATFORM alpine:3.13 AS runtime
+# FROM --platform=$TARGETPLATFORM alpine:3.13 AS runtime
+FROM --platform=$TARGETPLATFORM alpine:latest AS runtime
 LABEL org.opencontainers.image.source https://silencebay@github.com/silencebay/clash-tproxy.git
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
