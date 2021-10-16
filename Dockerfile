@@ -19,7 +19,7 @@ RUN set -eux; \
     \
     if [ "${TARGETPLATFORM}" = "linux/amd64" ]; then architecture="linux64" ; fi; \
     if [ "${TARGETPLATFORM}" = "linux/arm64" ]; then architecture="aarch64" ; fi; \
-    if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="armhf" ; fi; \
+    if [ "${TARGETPLATFORM}" = "linux/arm/v7" ] ; then architecture="armv7" ; fi; \
     subconverter_download_url=$(curl -L https://api.github.com/repos/tindy2013/subconverter/releases/latest | jq -r --arg architecture "$architecture" '.assets[] | select (.name | contains($architecture)) | .browser_download_url' -); \
     curl -L -o subconverter.tar.gz $subconverter_download_url;
     
