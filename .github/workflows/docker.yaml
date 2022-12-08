@@ -73,9 +73,9 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/aiclash:amd64
-            ${{ secrets.DOCKERHUB_USERNAME }}/aiclash:${{ steps.version.outputs.result }}
+            # ${{ secrets.DOCKERHUB_USERNAME }}/aiclash:${{ steps.version.outputs.result }}
             ghcr.io/gdfsnhsw/aiclash:amd64
-            ghcr.io/gdfsnhsw/aiclash:${{ steps.version.outputs.result }}
+            # ghcr.io/gdfsnhsw/aiclash:${{ steps.version.outputs.result }}
           build-args: |
             FIREQOS_VERSION=${{ secrets.FIREQOS_VERSION }}
           cache-from: type=local,src=/tmp/.buildx-cache
